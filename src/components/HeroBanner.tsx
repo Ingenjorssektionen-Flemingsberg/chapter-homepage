@@ -1,20 +1,20 @@
 import { Box, Typography } from "@mui/material";
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
 
 interface HeroBannerProps {
-  image: string; // background image
-  title: string | React.ReactNode; // main text
-  subtitle?: string; // optional smaller line above
-  height?: string | number; // height (default 70vh)
-  overlayLight?: number; // overlay opacity in light mode
-  overlayDark?: number; // overlay opacity in dark mode
+  image: string;
+  title: string | React.ReactNode;
+  subtitle?: string;
+  height?: string | number;
+  overlayLight?: number;
+  overlayDark?: number;
 }
 
 export default function HeroBanner({
   image,
   title,
   subtitle,
-  height = "70vh",
+  height = "100vh",
   overlayLight = 0.35,
   overlayDark = 0.6,
 }: HeroBannerProps) {
@@ -24,62 +24,73 @@ export default function HeroBanner({
     <Box
       sx={{
         width: "100%",
-        height,
+        minHeight: height,
+        pt: { xs: "64px", md: "88px" },
         position: "relative",
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        overflow: "hidden",
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+
+        // Parallax background
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: { xs: "center", md: "center 35%" },
+        backgroundAttachment: { xs: "scroll", md: "fixed" }, // parallax on desktop only
 
         "&::before": {
           content: '""',
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: `rgba(0, 0, 0, ${
-            isDark ? overlayDark : overlayLight
-          })`,
+          inset: 0,
+          backgroundColor: `rgba(0,0,0,${isDark ? overlayDark : overlayLight})`,
           zIndex: 1,
         },
       }}
     >
-      {subtitle && (
-        <Typography
-          variant="h5"
-          sx={{
-            color: "white",
-            fontStyle: "italic",
-            zIndex: 2,
-            position: "relative",
-            textAlign: "center",
-            marginBottom: "2vh",
-            fontFamily: `"Times New Roman", serif`,
-          }}
-        >
-          {subtitle}
-        </Typography>
-      )}
-
-      <Typography
-        variant="h2"
+      {/* Content Box */}
+      <Box
         sx={{
-          color: "white",
-          fontWeight: "bold",
-          zIndex: 2,
           position: "relative",
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
+          zIndex: 2,
           textAlign: "center",
+          px: { xs: 2, sm: 4 },
+          maxWidth: 1000,
+          color: "white",
+          p: { xs: 2, sm: 3 },
         }}
       >
-        {title}
-      </Typography>
+        {subtitle && (
+          <Typography
+            sx={{
+              fontSize: { xs: "0.75rem", sm: "0.9rem" },
+              letterSpacing: "0.4em",
+              textTransform: "uppercase",
+              opacity: 0.85,
+              mb: 1,
+            }}
+          >
+            {subtitle}
+          </Typography>
+        )}
+
+        <Typography
+          sx={{
+            fontWeight: 800,
+            lineHeight: 1.05,
+            textTransform: "uppercase",
+            fontSize: {
+              xs: "1.8rem",
+              sm: "2.4rem",
+              md: "3.2rem",
+              lg: "3.8rem",
+            },
+            letterSpacing: { xs: "0.03em", md: "0.08em" },
+          }}
+        >
+          {title}
+        </Typography>
+      </Box>
     </Box>
   );
 }

@@ -117,6 +117,7 @@ export default function Calendar() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        top: 0,
       }}
     >
       <HeroBanner

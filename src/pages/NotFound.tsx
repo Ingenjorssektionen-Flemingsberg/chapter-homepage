@@ -1,10 +1,8 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../contexts/ThemeContext";
 
 export default function NotFound() {
   const navigate = useNavigate();
-  const { theme } = useTheme();
 
   return (
     <Container
@@ -15,17 +13,9 @@ export default function NotFound() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center", // horizontal center
+        justifyContent: "center",
       }}
     >
-      <Box
-        sx={{
-          width: "100vw",
-          height: "14vh",
-          backgroundColor: theme.palette.onBackground,
-          marginBottom: "20vh",
-        }}
-      />
-
       <Typography
         variant="h1"
         sx={{ fontSize: { xs: 80, sm: 120 }, fontWeight: "bold" }}
