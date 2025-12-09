@@ -1,8 +1,6 @@
 import { useMemo } from "react";
-import { Container, Typography, Box, IconButton, Tooltip } from "@mui/material";
+import { Typography, Box, IconButton, Tooltip } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import HeroBanner from "../components/HeroBanner";
-import event from "../assets/event.png";
 import { useCalendar } from "../contexts/CalenderContext";
 
 function getPaddedMonthGrid(date: Date) {
@@ -109,25 +107,7 @@ export default function Calendar() {
   const weekdayLabels = ["Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"];
 
   return (
-    <Container
-      disableGutters
-      sx={{
-        minHeight: "100vh",
-        minWidth: "100vw",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        top: 0,
-      }}
-    >
-      <HeroBanner
-        image={event}
-        height={"50vh"}
-        subtitle="Kom på våra"
-        title={"Events"}
-      />
-
-      {/* Header with navigation arrows */}
+    <>
       <Box
         sx={{
           display: "flex",
@@ -167,7 +147,6 @@ export default function Calendar() {
         </IconButton>
       </Box>
 
-      {/* Weekdays */}
       <Box
         sx={{
           width: "100%",
@@ -327,6 +306,6 @@ export default function Calendar() {
           );
         })}
       </Box>
-    </Container>
+    </>
   );
 }

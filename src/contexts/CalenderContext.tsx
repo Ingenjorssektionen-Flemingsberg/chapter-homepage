@@ -20,7 +20,7 @@ interface CalendarContextType {
 }
 
 const CalendarContext = createContext<CalendarContextType | undefined>(
-  undefined,
+  undefined
 );
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -47,16 +47,16 @@ export const CalendarProvider = ({
   // derive from/to from currentDate
   const from = useMemo(
     () => new Date(year, monthIndex, 1).toISOString(),
-    [year, monthIndex],
+    [year, monthIndex]
   );
   const to = useMemo(
     () => new Date(year, monthIndex + 1, 0, 23, 59, 59).toISOString(),
-    [year, monthIndex],
+    [year, monthIndex]
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [events, setEvents] = useState<any[]>([]);
-  const { loading, setLoading } = useLoading();
+  const { loading } = useLoading();
   const { showNotification } = useNotification();
 
   const nextOrPrevMonthFunc = useCallback((direction: "prev" | "next") => {
@@ -71,14 +71,12 @@ export const CalendarProvider = ({
       if (!from || !to || loading) return;
 
       try {
-        setLoading(true);
         const events = await getCalendarEvents(from, to);
         setEvents(events);
       } catch (err) {
         console.error("getCalendarEvents: " + err);
         showNotification("Failed to get events", "error");
       }
-      setLoading(false);
     };
 
     fetch();
@@ -92,7 +90,7 @@ export const CalendarProvider = ({
       events: events,
       nextOrPrevMonth: nextOrPrevMonthFunc,
     }),
-    [currentDate, from, to, events, nextOrPrevMonthFunc],
+    [currentDate, from, to, events, nextOrPrevMonthFunc]
   );
 
   return (

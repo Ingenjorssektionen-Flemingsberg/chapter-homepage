@@ -29,10 +29,10 @@ export const navItems: NavItem[] = [
     subLinks: [
       { label: "Sektionen", path: "/sektionen" },
       { label: "Sektionslokalen Rudan", path: "/rudan" },
-      { label: "Styrdokument", path: "/styrdokument" },
-      { label: "Sektionsmöten", path: "/sektionsmaten" },
+      { label: "Sektionsmöten", path: "/sektionsmoten" },
       { label: "Styrelsemöten", path: "/styrelsemoten" },
-      { label: "Skåp", path: "/skåp" },
+      { label: "Styrdokument", path: "/styrdokument" },
+      { label: "Skåp", path: "/skap" },
       { label: "Ovve", path: "/ovve" },
       { label: "Sångbok", path: "/sangbok" },
     ],
@@ -49,6 +49,7 @@ export const navItems: NavItem[] = [
       { label: "Studienämnden", path: "/studienamnden" },
       { label: "JML-nämnden", path: "/jml-namnden" },
       { label: "Lokalnämnden", path: "/lokalnamnden" },
+      { label: "Slurpen", path: "/slurpen" },
     ],
   },
   {

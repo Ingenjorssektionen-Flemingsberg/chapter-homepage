@@ -16,7 +16,7 @@ const OKRAROD = "#90302C";
 
 // DARK THEME – warm, moody, ochre-red accent
 const darkTheme = createTheme({
-  typography: {fontFamily: "'Times new roman', sans-serif"},
+  typography: { fontFamily: "'Times new roman', sans-serif" },
   palette: {
     mode: "dark",
     primary: { main: OKRAROD },
@@ -86,12 +86,23 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: "inherit",
+          textDecorationColor: "inherit",
+        },
+      },
+      defaultProps: {
+        underline: "always",
+      },
+    },
   },
 });
 
 // LIGHT THEME – soft, creamy background with okraröd accent
 const lightTheme = createTheme({
-  typography: {fontFamily: "'Times new roman', sans-serif"},
+  typography: { fontFamily: "'Times new roman', sans-serif" },
   palette: {
     mode: "light",
     primary: { main: OKRAROD },
@@ -160,6 +171,17 @@ const lightTheme = createTheme({
           "&:nth-of-type(odd)": { backgroundColor: "#FFF5EF" },
           "&:hover": { backgroundColor: "#F6D2C9" },
         },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: "inherit",
+          textDecorationColor: "inherit",
+        },
+      },
+      defaultProps: {
+        underline: "always",
       },
     },
   },

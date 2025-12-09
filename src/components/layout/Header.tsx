@@ -10,9 +10,9 @@ import {
   ListItemText,
   Collapse,
 } from "@mui/material";
-import IsFLogo from "../assets/IsF.png";
-import { navItems } from "../config/navConfig";
-import NavItemButton from "./buttons/NavItemButton";
+import IsFLogo from "../../assets/IsF.png";
+import { navItems } from "../../config/navConfig";
+import NavItemButton from "../buttons/NavItemButton";
 import { Link as RouterLink } from "react-router-dom";
 import {
   ContrastOutlined,
@@ -21,7 +21,7 @@ import {
   Menu,
 } from "@mui/icons-material";
 import { memo, useState } from "react";
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 
 function HeaderComponent() {
   const { isDark, toggleTheme } = useTheme();

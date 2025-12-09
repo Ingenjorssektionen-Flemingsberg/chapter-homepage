@@ -5,9 +5,10 @@ interface HeroBannerProps {
   image: string;
   title: string | React.ReactNode;
   subtitle?: string;
-  height?: string | number;
+  height?: string | number | { xs: string; md: string };
   overlayLight?: number;
   overlayDark?: number;
+  position?: { xs: string; md: string };
 }
 
 export default function HeroBanner({
@@ -17,6 +18,7 @@ export default function HeroBanner({
   height = "100vh",
   overlayLight = 0.35,
   overlayDark = 0.6,
+  position = { xs: "center", md: "center 35%" },
 }: Readonly<HeroBannerProps>) {
   const { isDark } = useTheme();
 
@@ -36,7 +38,7 @@ export default function HeroBanner({
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: { xs: "center", md: "center 35%" },
+        backgroundPosition: position,
         backgroundAttachment: { xs: "scroll", md: "fixed" }, // parallax on desktop only
 
         "&::before": {
