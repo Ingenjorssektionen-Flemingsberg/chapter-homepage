@@ -67,7 +67,7 @@ export const navItems: NavItem[] = [
         label: "Info om du blivit antagen",
         path: "/info-antagen",
       },
-      { label: "Hitta hit", path: "/hitta-hit-forsta-dagen" },
+      { label: "Hitta hit", path: "/hitta-hit" },
       { label: "Info om KTH Flemingsberg", path: "/info-om-kth-flemingsberg" },
       { label: "Vad gör sektionen", path: "/vad-gor-sektionen" },
       {

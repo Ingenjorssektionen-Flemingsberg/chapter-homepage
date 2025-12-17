@@ -1,9 +1,9 @@
-import { Divider, Link, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import foretag from "../../assets/organ-och-namnder/foretag.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
 import MessageForm from "../../components/MessageForm";
-import { Link as RouterLink } from "react-router-dom";
+import NavLink from "../../components/util/NavLink";
 
 export default function Foretagsgruppen() {
   return (
@@ -25,20 +25,16 @@ export default function Foretagsgruppen() {
         <br /> <br />
         Utöver detta ansvarar Företagsgruppen för att planera och genomföra
         sektionens arbetsmarknadsmässa{" "}
-        <Link component={RouterLink} to="https://isf-fam.se" target="_blank">
+        <NavLink to="https://isf-fam.se" remote>
           FAM
-        </Link>
+        </NavLink>
         , där företag och studenter möts under mer organiserade former. .
         <br /> <br />
         Vill du hålla dig uppdaterad om kommande event och möjligheter? Glöm
         inte att följa Företagsgruppen på{" "}
-        <Link
-          component={RouterLink}
-          to="https://www.instagram.com/isf_fam/"
-          target="_blank"
-        >
+        <NavLink to="https://www.instagram.com/isf_fam/" remote>
           Instagram
-        </Link>
+        </NavLink>
         .
       </Typography>
 

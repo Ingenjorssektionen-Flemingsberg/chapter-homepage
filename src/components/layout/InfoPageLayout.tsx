@@ -46,7 +46,7 @@ export default function InfoPageLayout({
 
       <Box
         sx={{
-          maxWidth: { xs: "90vw", md: "60vw" },
+          maxWidth: { xs: "90vw", md: "50vw" },
           width: "100%",
           display: "flex",
           flexDirection: "row",

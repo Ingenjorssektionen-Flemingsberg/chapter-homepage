@@ -23,6 +23,12 @@ import Slurpen from "./pages/organ-och-namnder/Slurpen";
 import Valberedningen from "./pages/organ-och-namnder/Valberedningen";
 import Utbytesnamnden from "./pages/organ-och-namnder/Utbytesnamnden";
 import Infogruppen from "./pages/organ-och-namnder/Infogruppen";
+import Mottagningen from "./pages/nyantagen/Mottagningen";
+import HittaHit from "./pages/nyantagen/HittaHit";
+import InfoAntagen from "./pages/nyantagen/InfoAntagen";
+import InfoFlemingsberg from "./pages/nyantagen/InfoFlemingsberg";
+import JoinSektionen from "./pages/nyantagen/JoinSektionen";
+import SektionenVerksamhet from "./pages/nyantagen/SektionenVerksamhet";
 
 export const routes: RouteObject[] = [
   {
@@ -54,6 +60,12 @@ export const routes: RouteObject[] = [
       { path: "/infogruppen", element: <Infogruppen /> },
       { path: "/slurpen", element: <Slurpen /> },
       // Nyantagen
+      { path: "/mottagningen", element: <Mottagningen /> },
+      { path: "/info-antagen", element: <InfoAntagen /> },
+      { path: "/hitta-hit", element: <HittaHit /> },
+      { path: "/info-om-kth-flemingsberg", element: <InfoFlemingsberg /> },
+      { path: "/vad-gor-sektionen", element: <SektionenVerksamhet /> },
+      { path: "/bli-del-av-sektionen", element: <JoinSektionen /> },
 
       { path: "*", element: <NotFound /> },
     ],

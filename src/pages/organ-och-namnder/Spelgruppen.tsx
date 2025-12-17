@@ -1,8 +1,8 @@
-import { Divider, Link, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import spruppen from "../../assets/organ-och-namnder/spruppen.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
-import { Link as RouterLink } from "react-router-dom";
+import NavLink from "../../components/util/NavLink";
 
 export default function Spelgruppen() {
   return (
@@ -24,9 +24,7 @@ export default function Spelgruppen() {
         föredrar konsolspel.
         <br /> <br />
         Varje onsdag anordnar Spruppen spelkvällar i våran lokal{" "}
-        <Link component={RouterLink} to="/rudan">
-          Rudan
-        </Link>
+        <NavLink to="/rudan">Rudan</NavLink>
         , där man kan komma förbi, slå sig ner och spela tillsammans med andra,
         helt utan krav på förkunskaper eller tävlingsinstinkt (om man inte
         vill). Det är ett perfekt tillfälle att ta en paus från plugget, testa
@@ -35,13 +33,9 @@ export default function Spelgruppen() {
         Har du frågor om Spruppen, förslag på spel som borde köpas in eller bara
         vill tipsa om ditt favoritspel? Hör av dig, vi är alltid öppna för bra
         idéer (och bra spel). Gå gärna med i vår{" "}
-        <Link
-          component={RouterLink}
-          to="https://discord.gg/vPWAkFauh6"
-          target="_blank"
-        >
+        <NavLink to="https://discord.gg/vPWAkFauh6" remote>
           Discord
-        </Link>{" "}
+        </NavLink>{" "}
         för att få de senaste uppdateringarna från oss!
       </Typography>
 

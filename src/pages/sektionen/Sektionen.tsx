@@ -1,9 +1,9 @@
-import { Divider, Typography, Link } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import sky from "../../assets/sektionen/sky.webp";
-import { Link as RouterLink } from "react-router-dom";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import { rolesConfig } from "../../config/rolesConfig";
 import ChapterRoles from "../../components/roles/ChapterRoles";
+import NavLink from "../../components/util/NavLink";
 
 export default function Sektionen() {
   return (
@@ -21,11 +21,7 @@ export default function Sektionen() {
         tänka på annat. Till er hjälp finns sektionen som arbetar ideellt med
         just detta. Allt från idrottsevent och studiebevakning till spelkvällar
         och fredagspubar. Allt om vad sektionen har att erbjuda kan ni läsa
-        under{" "}
-        <Link component={RouterLink} to="/organ-och-nämnder">
-          organ & nämnder
-        </Link>
-        .
+        under <NavLink to="/organ-och-nämnder">organ & nämnder</NavLink>.
       </Typography>
 
       <Divider

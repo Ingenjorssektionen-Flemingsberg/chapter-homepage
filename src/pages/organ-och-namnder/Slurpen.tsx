@@ -1,8 +1,8 @@
-import { Divider, Link, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import slurpen from "../../assets/organ-och-namnder/slurpen.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
-import { Link as RouterLink } from "react-router-dom";
+import NavLink from "../../components/util/NavLink";
 
 export default function Slurpen() {
   return (
@@ -20,13 +20,9 @@ export default function Slurpen() {
         Slurpenredaktionen, eller bara Slurpen, står för sektionens mer
         lättsamma innehåll. Det handlar främst om roliga inlägg och igenkännbara
         situationer från studentlivet, som delas på Slurpens{" "}
-        <Link
-          component={RouterLink}
-          to="https://www.instagram.com/isf_fam/"
-          target="_blank"
-        >
+        <NavLink to="https://www.instagram.com/isf_fam/" remote>
           Instagram
-        </Link>
+        </NavLink>
         .
         <br /> <br />
         Tanken är inte att vara något avancerat, utan snarare att bidra med lite

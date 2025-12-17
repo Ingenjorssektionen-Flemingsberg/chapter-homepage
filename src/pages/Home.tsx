@@ -1,18 +1,11 @@
-import {
-  Container,
-  Box,
-  Typography,
-  Stack,
-  Link,
-  IconButton,
-} from "@mui/material";
+import { Container, Box, Typography, Stack, IconButton } from "@mui/material";
 import banner from "../assets/banner.webp";
 import HeroBanner from "../components/HeroBanner";
-import { Link as RouterLink } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../hooks/useTheme";
+import NavLink from "../components/util/NavLink";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -73,29 +66,21 @@ export default function Home() {
               mr={{ xs: "1rem" }}
             >
               Ingenjörssektionen Flemingsberg (IsF) är en sektion under{" "}
-              <Link
-                component={RouterLink}
-                to="https://ths.kth.se/"
-                target="_blank"
-              >
+              <NavLink to="https://ths.kth.se/" remote>
                 Tekniska Högskolans Studentkår
-              </Link>{" "}
+              </NavLink>{" "}
               som ansvarar för studentlivet för alla som pluggar på KTH
               Flemingsberg. Vill du veta mer om kåren och hur du kan bli
               engagerad i sektionen kan du läsa mer{" "}
-              <Link component={RouterLink} to="/sektionen" target="_blank">
+              <NavLink to="/sektionen" remote>
                 här
-              </Link>
+              </NavLink>
               .
               <br /> <br />
               Kika gärna in vår{" "}
-              <Link
-                component={RouterLink}
-                to="https://linktr.ee/isflemingsberg"
-                target="_blank"
-              >
+              <NavLink to="https://linktr.ee/isflemingsberg" remote>
                 LinkTree
-              </Link>{" "}
+              </NavLink>{" "}
               och följ oss på våra sociala medier för att få de senaste
               uppdateringarna.
             </Typography>
@@ -159,7 +144,7 @@ export default function Home() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            />
           </Box>
         </Stack>
       </Box>

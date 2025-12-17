@@ -1,8 +1,8 @@
-import { Divider, Typography, Link } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import igor from "../../assets/organ-och-namnder/igor.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
-import { Link as RouterLink } from "react-router-dom";
+import NavLink from "../../components/util/NavLink";
 
 export default function Idrottsgruppen() {
   return (
@@ -25,13 +25,9 @@ export default function Idrottsgruppen() {
         igor@isflemingsberg.se
         <br /> <br />
         Gå gärna med i vår{" "}
-        <Link
-          component={RouterLink}
-          to="https://discord.gg/2EJ9YZp9Yp"
-          target="_blank"
-        >
+        <NavLink to="https://discord.gg/2EJ9YZp9Yp" remote>
           Discord
-        </Link>{" "}
+        </NavLink>{" "}
         för att få de senaste uppdateringarna från oss!
       </Typography>
 

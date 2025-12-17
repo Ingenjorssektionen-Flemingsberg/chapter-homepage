@@ -1,9 +1,9 @@
-import { Divider, Link, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import fisq from "../../assets/organ-och-namnder/fisq.webp";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import GroupRoles from "../../components/roles/GroupRoles";
-import { Link as RouterLink } from "react-router-dom";
 import SquareButton from "../../components/buttons/SquareButton";
+import NavLink from "../../components/util/NavLink";
 
 export default function QM() {
   return (
@@ -23,29 +23,18 @@ export default function QM() {
         för sektions fest och barverksamhet.
         <br /> <br />
         Puben är vanligtvis öppen varje fredag i kårlokalen{" "}
-        <Link component={RouterLink} to="/rudan">
-          Rudan
-        </Link>{" "}
-        från 17:17. Förutom fredagspubar anordnas sittningar och andra
-        festligheter under året. För inträde gäller kårmedlem (IsF / RKHSK /
-        MiT) +1.
+        <NavLink to="/rudan">Rudan</NavLink> från 17:17. Förutom fredagspubar
+        anordnas sittningar och andra festligheter under året. För inträde
+        gäller kårmedlem (IsF / RKHSK / MiT) +1.
         <br /> <br />
         Håll utkik{" "}
-        <Link
-          component={RouterLink}
-          to="http://facebook.com/FISQlubbmasteri/"
-          target="_blank"
-        >
+        <NavLink to="http://facebook.com/FISQlubbmasteri/" remote>
           Facebook
-        </Link>{" "}
+        </NavLink>{" "}
         eller{" "}
-        <Link
-          component={RouterLink}
-          to="https://www.instagram.com/fisqeri/"
-          target="_blank"
-        >
+        <NavLink to="https://www.instagram.com/fisqeri/" remote>
           Instagram
-        </Link>{" "}
+        </NavLink>{" "}
         för aktiviteter som FISQ anordnar.
         <br /> <br />
         Är du intresserad av att veta mer om barverksamheten och kanske själv är

@@ -55,7 +55,9 @@ const NavSidebar: React.FC<NavSidebarProps> = ({ item }) => {
                   fontWeight: 400,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#666",
+                  color: window.location.pathname.endsWith(sub.path)
+                    ? "textSecondary"
+                    : "#666",
                 }}
               />
             </ListItemButton>
