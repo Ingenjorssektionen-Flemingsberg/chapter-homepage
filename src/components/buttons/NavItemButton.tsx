@@ -21,7 +21,11 @@ const NavItemButton: React.FC<NavItemButtonProps> = ({ item }) => {
   const hasSubLinks = !!item.subLinks?.length;
 
   const handleMainClick = () => {
-    if (item.path) {
+    if (!item.path) return;
+
+    if (item.remote) {
+      window.open(item.path, "_blank", "noopener,noreferrer");
+    } else {
       navigate(item.path);
     }
   };
@@ -64,8 +68,11 @@ const NavItemButton: React.FC<NavItemButtonProps> = ({ item }) => {
           px: item.superButton ? 2.5 : 1,
           py: item.superButton ? 0.7 : 0.5,
 
+          transition: "background-color 0.2s ease, color 0.2s ease",
+
           "&:hover": {
-            backgroundColor: "transparent",
+            backgroundColor: item.superButton ? "white" : "transparent",
+            color: item.superButton ? "black" : "white",
           },
         }}
       >
@@ -118,12 +125,14 @@ const NavItemButton: React.FC<NavItemButtonProps> = ({ item }) => {
                 >
                   <ListItemText
                     primary={sub.label}
-                    primaryTypographyProps={{
-                      fontFamily: "'Open Sans', sans-serif",
-                      fontSize: "0.8em",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "#EEE",
+                    slotProps={{
+                      primary: {
+                        fontFamily: "'Open Sans', sans-serif",
+                        fontSize: "0.8em",
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        color: "#EEE",
+                      },
                     }}
                   />
                 </ListItemButton>

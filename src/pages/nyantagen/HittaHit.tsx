@@ -19,12 +19,13 @@ export default function HittaHit() {
         Hälsovägen 11C <br />
         141 57 Huddinge <br />
         <br />
-        Restiden ligger på ca. 20 min med pendeltåget från Stockholm City till Flemingsberg. Från
-        stationen är det en promenad på ca. 10 min till KTH Flemingsberg som ligger vid
-        Flemingsbergs centrum. Följ skyltarna mot sjukhuset (Huddinge sjukhus). Huvudingången är på
-        samma sida som huvudentré till sjukhuset. Under inskrivningsdagen kommer det finnas faddrar
-        som är utspridda för att hjälpa dig hitta rätt från pendeln så fråga personerna i tröjor med
-        texten fadder.
+        Restiden ligger på ca. 20 min med pendeltåget från Stockholm City till
+        Flemingsberg. Från stationen är det en promenad på ca. 10 min till KTH
+        Flemingsberg som ligger vid Flemingsbergs centrum. Följ skyltarna mot
+        sjukhuset (Huddinge sjukhus). Huvudingången är på samma sida som
+        huvudentré till sjukhuset. Under inskrivningsdagen kommer det finnas
+        faddrar som är utspridda för att hjälpa dig hitta rätt från pendeln så
+        fråga personerna i tröjor med texten fadder.
       </Typography>
 
       <Box sx={{ width: "100%", height: { xs: 300, md: 400 } }}>

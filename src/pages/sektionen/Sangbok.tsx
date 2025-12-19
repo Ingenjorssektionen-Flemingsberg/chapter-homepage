@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import SquareButton from "../../components/buttons/SquareButton";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
+import { LINKS } from "../../config/links";
 
 export default function Sangbok() {
   return (
@@ -24,7 +25,7 @@ export default function Sangbok() {
         Vill du köpa ditt eget exemplar? Skicka ett mejl eller kom förbi Kexet{" "}
         {"<3"}
       </Typography>
-      <SquareButton to="mailto:styrelsen@isflemingsberg.se" fontSize="1.2em">
+      <SquareButton link={LINKS.mail.styrelsen} fontSize="1.2em">
         styrelsen@isflemingsberg.se
       </SquareButton>
     </InfoPageLayout>

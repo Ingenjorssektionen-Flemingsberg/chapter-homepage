@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import SquareButton from "../../components/buttons/SquareButton";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
+import { LINKS } from "../../config/links";
 
 export default function Skap() {
   return (
@@ -22,14 +23,14 @@ export default function Skap() {
         <br /> En deposition på 500kr tillkommer. Den återfås vid återlämning av
         nyckel.
       </Typography>
-      <SquareButton to="mailto:skap@isflemingsberg.se" fontSize="1.2em">
+      <SquareButton link={LINKS.mail.styrelsen} fontSize="1.2em">
         frågor?
       </SquareButton>
 
       <Typography variant="body1" mb={3} mt={7}>
         Om du inte är kårmedlem kan du betala kårmedlemskapet hos THS.
       </Typography>
-      <SquareButton to="https://ths.kth.se/" fontSize="1.2em">
+      <SquareButton link={LINKS.ths.root} fontSize="1.2em">
         bli kårmedlem
       </SquareButton>
     </InfoPageLayout>

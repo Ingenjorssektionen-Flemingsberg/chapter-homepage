@@ -3,6 +3,7 @@ import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import igor from "../../assets/organ-och-namnder/igor.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
 import NavLink from "../../components/util/NavLink";
+import { LINKS } from "../../config/links";
 
 export default function Idrottsgruppen() {
   return (
@@ -25,10 +26,8 @@ export default function Idrottsgruppen() {
         igor@isflemingsberg.se
         <br /> <br />
         Gå gärna med i vår{" "}
-        <NavLink to="https://discord.gg/2EJ9YZp9Yp" remote>
-          Discord
-        </NavLink>{" "}
-        för att få de senaste uppdateringarna från oss!
+        <NavLink link={LINKS.social.idrottDiscord}>Discord</NavLink> för att få
+        de senaste uppdateringarna från oss!
       </Typography>
 
       <Divider sx={{ my: 3 }} />

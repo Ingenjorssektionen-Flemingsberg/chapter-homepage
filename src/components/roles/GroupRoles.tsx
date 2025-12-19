@@ -58,7 +58,7 @@ export default function GroupRoles({
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             Kontakt
           </Typography>
-          <NavLink to={`mailto:${foundGroup?.contact}`}>
+          <NavLink link={{ href: `mailto:${foundGroup?.contact}` }}>
             {foundGroup?.contact}
           </NavLink>
         </Stack>

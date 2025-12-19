@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { Typography, Box, IconButton, Tooltip } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useCalendar } from "../contexts/CalenderContext";
-import { useTheme } from "../hooks/useTheme";
 
 function getPaddedMonthGrid(date: Date) {
   const year = date.getFullYear();
@@ -51,7 +50,6 @@ function getHoursMinutes(dateTime: string) {
 }
 
 export default function Calendar() {
-  const { theme } = useTheme();
   const { currentDate, events, nextOrPrevMonth } = useCalendar();
   const monthName = currentDate.toLocaleString("default", { month: "long" });
   const monthGrid = useMemo(

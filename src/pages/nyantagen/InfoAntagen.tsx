@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import NavLink from "../../components/util/NavLink";
 import infoAntagen from "../../assets/nyantagen/info-antagen.webp";
+import { LINKS } from "../../config/links";
 
 export default function InfoAntagen() {
   return (
@@ -20,64 +21,41 @@ export default function InfoAntagen() {
         Hej!
         <br />
         <br />
-        Stort grattis till att du har blivit antagen till en av utbildningarna här på KTH
-        Flemingsberg. Mycket kommer att ske de första veckorna med intro kurser, mottagningen och
-        att träffa nya människor.
+        Stort grattis till att du har blivit antagen till en av utbildningarna
+        här på KTH Flemingsberg. Mycket kommer att ske de första veckorna med
+        intro kurser, mottagningen och att träffa nya människor.
         <br />
         <br />
-        Det <strong>obligatoriska uppropet</strong> för alla högskoleutbildningar här på{" "}
-        <strong>KTH Flemingsberg</strong> kommer att informeras om snart. Alla antagna kommer att
-        delas in i olika grupper beroende på vilken utbildning du har sökt till, så glöm inte att
-        kolla vilken tid och grupp du tillhör till.
+        Det <strong>obligatoriska uppropet</strong> för alla
+        högskoleutbildningar här på <strong>KTH Flemingsberg</strong> kommer att
+        informeras om snart. Alla antagna kommer att delas in i olika grupper
+        beroende på vilken utbildning du har sökt till, så glöm inte att kolla
+        vilken tid och grupp du tillhör till.
         <br />
         <br />
         Mer information om tider och gruppindelningar hittar du här:
         <ul>
           <li>
-            <NavLink
-              remote
-              to="https://www.kth.se/student/studier/nypakth/tekniskt-basar-kthflemingsberg-1.553271"
-            >
-              Tekniskt basår, 60 fup{" "}
-            </NavLink>
+            <NavLink link={LINKS.kth.bas}>Tekniskt basår, 60 fup </NavLink>
           </li>
           <li>
-            <NavLink
-              remote
-              to="https://www.kth.se/student/studier/nypakth/antagen-till-teknik-och-ekonomi-180-hp-1.358413"
-            >
+            <NavLink link={LINKS.kth.titeh}>
               Teknik och Ekonomi, 180 hp{" "}
             </NavLink>
           </li>
           <li>
-            <NavLink
-              remote
-              to="https://www.kth.se/student/studier/nypakth/datateknik-flemingsberg-180-1.20533"
-            >
-              Datateknik, 180 hp{" "}
-            </NavLink>
+            <NavLink link={LINKS.kth.tidaa}>Datateknik, 180 hp </NavLink>
           </li>
           <li>
-            <NavLink
-              remote
-              to="https://www.kth.se/student/studier/nypakth/elektroteknik-180-1.62763"
-            >
-              Elektroteknik, 180 hp
-            </NavLink>
+            <NavLink link={LINKS.kth.tiela}>Elektroteknik, 180 hp</NavLink>
           </li>
           <li>
-            <NavLink
-              remote
-              to="https://www.kth.se/student/studier/nypakth/medicinsk-teknik-180-1.553000"
-            >
-              Medicinsk teknik, 180 hp
-            </NavLink>
+            <NavLink link={LINKS.kth.timel}>Medicinsk teknik, 180 hp</NavLink>
           </li>
         </ul>
-        Plats: Servicecenter, KTH Flemingsberg (entréplan). Hälsovägen 11C, Huddinge.{" "}
-        <NavLink to="https://maps.app.goo.gl/sUKCHSNANoSyEVV56" remote>
-          Se platsen på karta
-        </NavLink>
+        Plats: Servicecenter, KTH Flemingsberg (entréplan). Hälsovägen 11C,
+        Huddinge.{" "}
+        <NavLink link={LINKS.maps.kthFlemingsberg}>Se platsen på karta</NavLink>
         .
         <br />
         <br />
@@ -85,13 +63,12 @@ export default function InfoAntagen() {
         <br />
         <br />
         <strong>
-          Om du inte kan närvara vid uppropet måste du ansöka om dispens. Ansökan om dispens gör du
-          via följande formulär senast samma dag som uppropet!
+          Om du inte kan närvara vid uppropet måste du ansöka om dispens.
+          Ansökan om dispens gör du via följande formulär senast samma dag som
+          uppropet!
         </strong>
         <br />
-        <NavLink remote to="https://www.kth.se/student/studier/nypakth/dispens">
-          Ansökan om dispens
-        </NavLink>
+        <NavLink link={LINKS.kth.dispens}>Ansökan om dispens</NavLink>
       </Typography>
     </InfoPageLayout>
   );

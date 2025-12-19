@@ -1,9 +1,25 @@
-import { Box, Button, IconButton, Toolbar, Drawer, List, ListItem, ListItemButton, ListItemText, Collapse } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Toolbar,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Collapse,
+} from "@mui/material";
 import IsFLogo from "../../assets/IsF.png";
 import { navItems } from "../../config/navConfig";
 import NavItemButton from "../buttons/NavItemButton";
 import { Link as RouterLink } from "react-router-dom";
-import { ContrastOutlined, ExpandLess, ExpandMore, Menu } from "@mui/icons-material";
+import {
+  ContrastOutlined,
+  ExpandLess,
+  ExpandMore,
+  Menu,
+} from "@mui/icons-material";
 import { memo, useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 
@@ -34,11 +50,17 @@ function HeaderComponent() {
           justifyContent: "space-between",
           width: "100%",
           backdropFilter: "blur(10px)",
-          backgroundColor: (_) => (!isDark ? "rgba(0,0,0,0.2)" : "rgba(255,255,255,0.2)"),
+          backgroundColor: (_) =>
+            isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
         }}
       >
         {/* Logo */}
-        <IconButton component={RouterLink} to="/" disableRipple sx={{ display: "flex", alignItems: "center", p: 2 }}>
+        <IconButton
+          component={RouterLink}
+          to="/"
+          disableRipple
+          sx={{ display: "flex", alignItems: "center", p: 2 }}
+        >
           <Box
             component="img"
             src={IsFLogo}
@@ -78,7 +100,12 @@ function HeaderComponent() {
         </Box>
 
         {/* Mobile menu button */}
-        <IconButton color="inherit" edge="end" sx={{ display: { xs: "flex", md: "none" } }} onClick={handleDrawerToggle}>
+        <IconButton
+          color="inherit"
+          edge="end"
+          sx={{ display: { xs: "flex", md: "none" } }}
+          onClick={handleDrawerToggle}
+        >
           <Menu />
         </IconButton>
       </Toolbar>
@@ -101,7 +128,9 @@ function HeaderComponent() {
                       sx={{
                         color: isDark ? "#fff" : "#000", // ensure text is visible
                         "&:hover": {
-                          backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+                          backgroundColor: isDark
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
                         },
                       }}
                     >
@@ -116,7 +145,9 @@ function HeaderComponent() {
                       sx={{
                         color: isDark ? "#fff" : "#000", // ensure text is visible
                         "&:hover": {
-                          backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+                          backgroundColor: isDark
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
                         },
                       }}
                     >
@@ -155,7 +186,9 @@ function HeaderComponent() {
               sx={{
                 color: isDark ? "#fff" : "#000",
                 "&:hover": {
-                  backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+                  backgroundColor: isDark
+                    ? "rgba(255,255,255,0.1)"
+                    : "rgba(0,0,0,0.05)",
                 },
               }}
             >

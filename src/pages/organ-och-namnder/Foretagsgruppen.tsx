@@ -4,6 +4,7 @@ import foretag from "../../assets/organ-och-namnder/foretag.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
 import MessageForm from "../../components/MessageForm";
 import NavLink from "../../components/util/NavLink";
+import { LINKS } from "../../config/links";
 
 export default function Foretagsgruppen() {
   return (
@@ -25,17 +26,12 @@ export default function Foretagsgruppen() {
         <br /> <br />
         Utöver detta ansvarar Företagsgruppen för att planera och genomföra
         sektionens arbetsmarknadsmässa{" "}
-        <NavLink to="https://isf-fam.se" remote>
-          FAM
-        </NavLink>
+        <NavLink link={LINKS.internal.fam}>FAM</NavLink>
         , där företag och studenter möts under mer organiserade former. .
         <br /> <br />
         Vill du hålla dig uppdaterad om kommande event och möjligheter? Glöm
         inte att följa Företagsgruppen på{" "}
-        <NavLink to="https://www.instagram.com/isf_fam/" remote>
-          Instagram
-        </NavLink>
-        .
+        <NavLink link={LINKS.social.famInstagram}>Instagram</NavLink>.
       </Typography>
 
       <Divider sx={{ my: 3 }} />

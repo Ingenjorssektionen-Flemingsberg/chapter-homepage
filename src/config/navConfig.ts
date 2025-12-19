@@ -7,6 +7,8 @@ export interface NavItem {
   label: string;
   path: string; // default link when button is clicked
   subLinks?: NavSubLink[];
+
+  remote?: boolean;
   superButton?: boolean;
 }
 
@@ -75,6 +77,11 @@ export const navItems: NavItem[] = [
         path: "/bli-del-av-sektionen",
       },
     ],
+  },
+  {
+    label: "Discord",
+    path: "https://discord.gg/qTj7QBJcU4",
+    remote: true,
   },
   {
     label: "Kontakt",

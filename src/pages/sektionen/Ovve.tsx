@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import SquareButton from "../../components/buttons/SquareButton";
 import ovve from "../../assets/sektionen/ovve.webp";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
+import { LINKS } from "../../config/links";
 
 export default function Ovve() {
   return (
@@ -27,7 +28,7 @@ export default function Ovve() {
         storlekar så att alla ska kunna hitta en som sitter perfekt.
         <br />
       </Typography>
-      <SquareButton to="mailto:ovve@isflemingsberg.se" fontSize="1.2em">
+      <SquareButton link={LINKS.mail.ovve} fontSize="1.2em">
         köp ovve
       </SquareButton>
       <Typography variant="body1" mb={3} mt={7}>
@@ -35,8 +36,7 @@ export default function Ovve() {
         reglerna och de små hemligheter som ovvekulturen involverar. Ta väl hand
         om den, den kommer vara med dig i vått och torrt.
       </Typography>
-      {/* TODO: Fixa pdf, antingen via drive eller om man ska kunna lägga upp på webbsidan */}
-      <SquareButton to="" fontSize="1.2em">
+      <SquareButton link={LINKS.docs.ovveguide} fontSize="1.2em">
         ovveguide (PDF)
       </SquareButton>
     </InfoPageLayout>

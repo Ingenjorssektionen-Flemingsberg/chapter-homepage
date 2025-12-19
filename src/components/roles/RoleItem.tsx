@@ -56,7 +56,7 @@ export default function RoleItem({
 
       {showContact && foundRole?.contact && (
         <Stack spacing={0}>
-          <NavLink to={`mailto:${foundRole?.contact}`}>
+          <NavLink link={{ href: `mailto:${foundRole?.contact}` }}>
             {foundRole?.contact}
           </NavLink>
         </Stack>

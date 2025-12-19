@@ -1,29 +1,32 @@
 import { Link, type LinkProps } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import type { LinkTo } from "../../config/links";
 
-type SquareButtonProps = {
+type NavLinkProps = {
   children: React.ReactNode;
-  to: string;
-  remote?: boolean;
-} & Omit<LinkProps, "component" | "to" | "children">;
+  link: LinkTo;
+} & Omit<LinkProps, "component" | "to" | "href" | "children">;
 
-export default function SquareButton({
+export default function NavLink({
   children,
-  to,
-  remote,
+  link,
   ...linkProps
-}: Readonly<SquareButtonProps>) {
-  const target = "_blank";
+}: Readonly<NavLinkProps>) {
+  const isRemote = link?.remote === true;
 
   return (
     <Link
       {...linkProps}
-      component={RouterLink}
-      to={to}
-      {...(remote && { target })}
-      sx={{
-        ...linkProps.sx,
-      }}
+      component={isRemote ? "a" : RouterLink}
+      {...(isRemote
+        ? {
+            href: link?.href,
+            target: "_blank",
+            rel: "noopener noreferrer",
+          }
+        : {
+            to: link?.href,
+          })}
     >
       {children}
     </Link>

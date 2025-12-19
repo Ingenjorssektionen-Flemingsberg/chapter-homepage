@@ -49,15 +49,17 @@ const NavSidebar: React.FC<NavSidebarProps> = ({ item }) => {
             >
               <ListItemText
                 primary={sub.label}
-                primaryTypographyProps={{
-                  fontFamily: "'Open Sans', sans-serif",
-                  fontSize: "0.9em",
-                  fontWeight: 400,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: window.location.pathname.endsWith(sub.path)
-                    ? "textSecondary"
-                    : "#666",
+                slotProps={{
+                  primary: {
+                    fontFamily: "'Open Sans', sans-serif",
+                    fontSize: "0.9em",
+                    fontWeight: 400,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: globalThis.location.pathname.endsWith(sub.path)
+                      ? "textSecondary"
+                      : "#666",
+                  },
                 }}
               />
             </ListItemButton>

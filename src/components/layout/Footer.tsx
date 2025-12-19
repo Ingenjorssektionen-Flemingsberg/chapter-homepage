@@ -4,6 +4,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../../hooks/useTheme";
 import NavLink from "../util/NavLink";
+import { LINKS } from "../../config/links";
 
 export default function Footer() {
   const { theme } = useTheme();
@@ -46,7 +47,7 @@ export default function Footer() {
         <Typography>
           Har du frågor?{" "}
           <NavLink
-            to="mailto:styrelsen@isflemingsberg.se"
+            link={LINKS.mail.styrelsen}
             sx={{ color: theme.palette.secondary.main }}
           >
             styrelsen@isflemingsberg.se
@@ -56,13 +57,13 @@ export default function Footer() {
         <Typography>
           Lämna klagomål till sektionen:{" "}
           <NavLink
-            to="/jml"
+            link={LINKS.internal.jml}
             sx={{ color: theme.palette.secondary.main, mr: 1 }}
           >
             JML
           </NavLink>
           <NavLink
-            to="/studienamnden"
+            link={LINKS.internal.studienamnden}
             sx={{ color: theme.palette.secondary.main }}
           >
             Studienämnden

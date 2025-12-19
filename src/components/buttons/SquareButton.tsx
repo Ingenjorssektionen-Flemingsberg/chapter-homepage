@@ -1,16 +1,17 @@
 import { Button, type ButtonProps, useTheme } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import type { LinkTo } from "../../config/links";
 
 type SquareButtonProps = {
   children: React.ReactNode;
-  to?: string; // link mode
+  link?: LinkTo; // link mode
   width?: string | number;
   fontSize?: string;
 } & Omit<ButtonProps, "component" | "children">;
 
 export default function SquareButton({
   children,
-  to,
+  link,
   width = "auto",
   fontSize = "1.25em",
   ...buttonProps
@@ -18,13 +19,16 @@ export default function SquareButton({
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
-  const isLink = Boolean(to);
+  const isLink = Boolean(link);
 
   return (
     <Button
       {...buttonProps}
       component={isLink ? RouterLink : "button"}
-      {...(isLink && { to })}
+      {...(isLink && {
+        to: link?.href,
+        target: link?.remote ? "_blank" : "_self",
+      })}
       sx={{
         width,
         textAlign: "center",

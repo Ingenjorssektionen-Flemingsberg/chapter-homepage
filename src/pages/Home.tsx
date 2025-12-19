@@ -6,6 +6,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../hooks/useTheme";
 import NavLink from "../components/util/NavLink";
+import { LINKS } from "../config/links";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -66,23 +67,18 @@ export default function Home() {
               mr={{ xs: "1rem" }}
             >
               Ingenjörssektionen Flemingsberg (IsF) är en sektion under{" "}
-              <NavLink to="https://ths.kth.se/" remote>
+              <NavLink link={LINKS.ths.root}>
                 Tekniska Högskolans Studentkår
               </NavLink>{" "}
               som ansvarar för studentlivet för alla som pluggar på KTH
               Flemingsberg. Vill du veta mer om kåren och hur du kan bli
               engagerad i sektionen kan du läsa mer{" "}
-              <NavLink to="/sektionen" remote>
-                här
-              </NavLink>
+              <NavLink link={LINKS.internal.sektionen}>här</NavLink>
               .
               <br /> <br />
               Kika gärna in vår{" "}
-              <NavLink to="https://linktr.ee/isflemingsberg" remote>
-                LinkTree
-              </NavLink>{" "}
-              och följ oss på våra sociala medier för att få de senaste
-              uppdateringarna.
+              <NavLink link={LINKS.social.linktree}>LinkTree</NavLink> och följ
+              oss på våra sociala medier för att få de senaste uppdateringarna.
             </Typography>
 
             <Stack
@@ -92,7 +88,7 @@ export default function Home() {
               ml={{ xs: "1rem" }}
             >
               <IconButton
-                href="https://www.facebook.com/isflemingsberg/"
+                href={LINKS.social.facebook.href}
                 target="_blank"
                 aria-label="Facebook"
                 disableRipple
@@ -106,7 +102,7 @@ export default function Home() {
               </IconButton>
 
               <IconButton
-                href="https://instagram.com/isflemingsberg"
+                href={LINKS.social.instagram.href}
                 target="_blank"
                 aria-label="Instagram"
                 disableRipple
@@ -120,7 +116,7 @@ export default function Home() {
               </IconButton>
 
               <IconButton
-                href="https://www.linkedin.com/company/ingsekt"
+                href={LINKS.social.linkedin.href}
                 target="_blank"
                 aria-label="LinkedIn"
                 disableRipple
