@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, alpha } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -29,7 +29,6 @@ const darkTheme = createTheme({
       paper: "#241918", // lifted surface
     },
 
-    // Your custom keys (fine to keep if you’ve extended types)
     onBackground: "#F3E6DF",
     onPaper: "#FFF5EF",
 
@@ -86,16 +85,31 @@ const darkTheme = createTheme({
       },
     },
     MuiLink: {
+      defaultProps: { underline: "always" },
       styleOverrides: {
         root: {
-          color: "#1E5F87",
-          textDecorationColor: "inherit",
+          color: "#F2B9AA",
+          fontStyle: "italic",
+          textDecorationThickness: "2px",
+          textUnderlineOffset: "3px",
+          textDecorationColor: alpha("#F2B9AA", 0.65),
+          transition: "color 0.15s ease, text-decoration-color 0.15s ease",
+          "&:hover": {
+            color: "#FFE0D7",
+            textDecorationColor: alpha("#FFE0D7", 0.9),
+          },
+          "&:active": {
+            color: "#FFD0C4",
+            textDecorationColor: alpha(OKRAROD, 0.9),
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${alpha(OKRAROD, 0.85)}`,
+            outlineOffset: 2,
+          },
         },
       },
-      defaultProps: {
-        underline: "always",
-      },
     },
+
     MuiFormHelperText: {
       styleOverrides: {
         root: {
@@ -120,12 +134,8 @@ const lightTheme = createTheme({
       paper: "#FFFFFF",
     },
 
-    // --------------------------
-    // Custom foreground colours
-    // --------------------------
-    onBackground: OKRAROD, // deep warm brown for contrast
-    onPaper: "#4C1F1A", // slightly stronger for cards
-    // --------------------------
+    onBackground: OKRAROD,
+    onPaper: "#4C1F1A",
 
     text: {
       primary: "#3A1613",
@@ -181,16 +191,31 @@ const lightTheme = createTheme({
       },
     },
     MuiLink: {
+      defaultProps: { underline: "always" },
       styleOverrides: {
         root: {
-          color: "#1E5F87",
-          textDecorationColor: "inherit",
+          color: "#D25E57",
+          fontStyle: "italic",
+          textDecorationThickness: "2px",
+          textUnderlineOffset: "3px",
+          textDecorationColor: alpha("#D25E57", 0.55),
+          transition: "color 0.15s ease, text-decoration-color 0.15s ease",
+          "&:hover": {
+            color: "#E06F68",
+            textDecorationColor: alpha("#E06F68", 0.9),
+          },
+          "&:active": {
+            color: "#E88983",
+            textDecorationColor: alpha(OKRAROD, 0.75),
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${alpha(OKRAROD, 0.75)}`,
+            outlineOffset: 2,
+          },
         },
       },
-      defaultProps: {
-        underline: "always",
-      },
     },
+
     MuiFormHelperText: {
       styleOverrides: {
         root: {

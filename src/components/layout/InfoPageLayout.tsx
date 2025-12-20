@@ -8,6 +8,7 @@ interface InfoPageLayoutProps {
   navLabel: string;
   heroImage?: string;
   heroTitle?: string;
+  heroSubtitle?: string;
   heroHeight?: { xs: string; md: string };
   heroPosition?: { xs: string; md: string; lg?: string };
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export default function InfoPageLayout({
   navLabel,
   heroImage,
   heroTitle,
+  heroSubtitle,
   heroHeight = { xs: "40vh", md: "60vh" },
   heroPosition = { xs: "center", md: "center 35%" },
   children,
@@ -39,6 +41,7 @@ export default function InfoPageLayout({
         <HeroBanner
           image={heroImage}
           title={heroTitle ?? ""}
+          subtitle={heroSubtitle ?? ""}
           height={heroHeight}
           position={heroPosition}
         />
@@ -46,7 +49,7 @@ export default function InfoPageLayout({
 
       <Box
         sx={{
-          maxWidth: { xs: "90vw", md: "60vw" },
+          maxWidth: { xs: "90vw", md: "50vw" },
           width: "100%",
           display: "flex",
           flexDirection: "row",
@@ -69,9 +72,7 @@ export default function InfoPageLayout({
           />
         )}
 
-        <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
-          {children}
-        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>{children}</Box>
       </Box>
     </Container>
   );

@@ -7,6 +7,8 @@ export interface NavItem {
   label: string;
   path: string; // default link when button is clicked
   subLinks?: NavSubLink[];
+
+  remote?: boolean;
   superButton?: boolean;
 }
 
@@ -67,7 +69,7 @@ export const navItems: NavItem[] = [
         label: "Info om du blivit antagen",
         path: "/info-antagen",
       },
-      { label: "Hitta hit", path: "/hitta-hit-forsta-dagen" },
+      { label: "Hitta hit", path: "/hitta-hit" },
       { label: "Info om KTH Flemingsberg", path: "/info-om-kth-flemingsberg" },
       { label: "Vad gör sektionen", path: "/vad-gor-sektionen" },
       {
@@ -75,6 +77,11 @@ export const navItems: NavItem[] = [
         path: "/bli-del-av-sektionen",
       },
     ],
+  },
+  {
+    label: "Discord",
+    path: "https://discord.gg/qTj7QBJcU4",
+    remote: true,
   },
   {
     label: "Kontakt",

@@ -1,8 +1,10 @@
-import { Box, Typography, IconButton, Stack, Link } from "@mui/material";
+import { Box, Typography, IconButton, Stack } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../../hooks/useTheme";
+import NavLink from "../util/NavLink";
+import { LINKS } from "../../config/links";
 
 export default function Footer() {
   const { theme } = useTheme();
@@ -44,31 +46,28 @@ export default function Footer() {
       >
         <Typography>
           Har du frågor?{" "}
-          <Link
-            href="mailto:styrelsen@isflemingsberg.se"
-            underline="hover"
+          <NavLink
+            link={LINKS.mail.styrelsen}
             sx={{ color: theme.palette.secondary.main }}
           >
             styrelsen@isflemingsberg.se
-          </Link>
+          </NavLink>
         </Typography>
 
         <Typography>
           Lämna klagomål till sektionen:{" "}
-          <Link
-            href="/jml"
-            underline="hover"
+          <NavLink
+            link={LINKS.internal.jml}
             sx={{ color: theme.palette.secondary.main, mr: 1 }}
           >
             JML
-          </Link>
-          <Link
-            href="/studienamnden"
-            underline="hover"
+          </NavLink>
+          <NavLink
+            link={LINKS.internal.studienamnden}
             sx={{ color: theme.palette.secondary.main }}
           >
             Studienämnden
-          </Link>
+          </NavLink>
         </Typography>
       </Stack>
 

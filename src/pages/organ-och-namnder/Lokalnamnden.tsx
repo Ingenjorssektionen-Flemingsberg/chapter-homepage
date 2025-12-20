@@ -1,8 +1,9 @@
-import { Divider, Link, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import lokal from "../../assets/banner.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
-import { Link as RouterLink } from "react-router-dom";
+import NavLink from "../../components/util/NavLink";
+import { LINKS } from "../../config/links";
 
 export default function Lokalnamnden() {
   return (
@@ -17,11 +18,8 @@ export default function Lokalnamnden() {
       </Typography>
       <Typography variant="body1">
         Lokalnämnden ansvarar för skötseln av kårlokalen{" "}
-        <Link component={RouterLink} to="/rudan">
-          Rudan
-        </Link>
-        . De ansvarar även för inköp av möbler, och allt som man kan tänkas
-        vilja ha i lokalen.
+        <NavLink link={LINKS.internal.rudan}>Rudan</NavLink>. De ansvarar även
+        för inköp av möbler, och allt som man kan tänkas vilja ha i lokalen.
       </Typography>
 
       <Divider sx={{ my: 3 }} />

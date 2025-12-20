@@ -1,7 +1,7 @@
-import { Box, Link, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import type { Role } from "../../types/chapter";
 import { rolesConfig } from "../../config/rolesConfig";
-import { Link as RouterLink } from "react-router-dom";
+import NavLink from "../util/NavLink";
 
 type RoleItemProps = {
   role?: Role;
@@ -56,12 +56,9 @@ export default function RoleItem({
 
       {showContact && foundRole?.contact && (
         <Stack spacing={0}>
-          {/* <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            Kontakt
-          </Typography> */}
-          <Link component={RouterLink} to={`mailto:${foundRole?.contact}`}>
+          <NavLink link={{ href: `mailto:${foundRole?.contact}` }}>
             {foundRole?.contact}
-          </Link>
+          </NavLink>
         </Stack>
       )}
     </Box>

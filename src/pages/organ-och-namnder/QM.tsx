@@ -1,9 +1,10 @@
-import { Divider, Link, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import fisq from "../../assets/organ-och-namnder/fisq.webp";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import GroupRoles from "../../components/roles/GroupRoles";
-import { Link as RouterLink } from "react-router-dom";
 import SquareButton from "../../components/buttons/SquareButton";
+import NavLink from "../../components/util/NavLink";
+import { LINKS } from "../../config/links";
 
 export default function QM() {
   return (
@@ -23,30 +24,15 @@ export default function QM() {
         för sektions fest och barverksamhet.
         <br /> <br />
         Puben är vanligtvis öppen varje fredag i kårlokalen{" "}
-        <Link component={RouterLink} to="/rudan">
-          Rudan
-        </Link>{" "}
-        från 17:17. Förutom fredagspubar anordnas sittningar och andra
-        festligheter under året. För inträde gäller kårmedlem (IsF / RKHSK /
-        MiT) +1.
+        <NavLink link={LINKS.internal.rudan}>Rudan</NavLink> från 17:17. Förutom
+        fredagspubar anordnas sittningar och andra festligheter under året. För
+        inträde gäller kårmedlem (IsF / RKHSK / MiT) +1.
         <br /> <br />
-        Håll utkik{" "}
-        <Link
-          component={RouterLink}
-          to="http://facebook.com/FISQlubbmasteri/"
-          target="_blank"
-        >
+        Håll utkik <NavLink link={LINKS.social.qmFacebook}>
           Facebook
-        </Link>{" "}
-        eller{" "}
-        <Link
-          component={RouterLink}
-          to="https://www.instagram.com/fisqeri/"
-          target="_blank"
-        >
-          Instagram
-        </Link>{" "}
-        för aktiviteter som FISQ anordnar.
+        </NavLink>{" "}
+        eller <NavLink link={LINKS.social.qmInstagram}>Instagram</NavLink> för
+        aktiviteter som FISQ anordnar.
         <br /> <br />
         Är du intresserad av att veta mer om barverksamheten och kanske själv är
         sugen på att stå bakom baren kontakta qm@isflemingsberg.se eller sväng
@@ -68,11 +54,14 @@ export default function QM() {
 
       <Typography variant="h5">Viktiga Dokument</Typography>
 
-      {/* TODO: Fixa pdf, antingen via drive eller om man ska kunna lägga upp på webbsidan */}
-      <SquareButton to="" fontSize="1em" sx={{ mt: 3 }}>
+      <SquareButton
+        link={LINKS.docs.qmReglemente}
+        fontSize="1em"
+        sx={{ mt: 3 }}
+      >
         Reglemente
       </SquareButton>
-      <SquareButton to="" fontSize="1em" sx={{ mt: 3 }}>
+      <SquareButton link={LINKS.docs.qmProtokoll} fontSize="1em" sx={{ mt: 3 }}>
         Protokoll (QMM)
       </SquareButton>
     </InfoPageLayout>

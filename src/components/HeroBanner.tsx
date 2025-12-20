@@ -65,7 +65,7 @@ export default function HeroBanner({
         {subtitle && (
           <Typography
             sx={{
-              fontSize: { xs: "0.75rem", sm: "0.9rem" },
+              fontSize: { xs: "0.75rem", sm: "0.9rem", md: "1.2em" },
               letterSpacing: "0.4em",
               textTransform: "uppercase",
               opacity: 0.85,

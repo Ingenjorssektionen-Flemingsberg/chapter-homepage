@@ -25,19 +25,12 @@ chapter:
       - name: Gudfadder
         members: [William Ramberg]
       - name: Vice Gudfadder
-        members:
-          [
-            Engla Lundin,
-            Tuva Svanström,
-            Patryk Kondratowicz,
-            Emelie Olsson,
-            Aida Lagumdzija,
-            Þráinn Þórisson,
-          ]
+        members: [Engla Lundin, Tuva Svanström, Patryk Kondratowicz, Emelie Olsson, Aida Lagumdzija, Þráinn Þórisson]
       - name: Mottagningskassör
         members: [Riff Bravo]
 
   - name: Talsmanspresidiet
+    contact: talman@isflemingsberg.se
     roles:
       - name: Talman
         members: [Axel Åström]

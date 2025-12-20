@@ -1,18 +1,12 @@
-import {
-  Container,
-  Box,
-  Typography,
-  Stack,
-  Link,
-  IconButton,
-} from "@mui/material";
+import { Container, Box, Typography, Stack, IconButton } from "@mui/material";
 import banner from "../assets/banner.webp";
 import HeroBanner from "../components/HeroBanner";
-import { Link as RouterLink } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../hooks/useTheme";
+import NavLink from "../components/util/NavLink";
+import { LINKS } from "../config/links";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -73,31 +67,18 @@ export default function Home() {
               mr={{ xs: "1rem" }}
             >
               Ingenjörssektionen Flemingsberg (IsF) är en sektion under{" "}
-              <Link
-                component={RouterLink}
-                to="https://ths.kth.se/"
-                target="_blank"
-              >
+              <NavLink link={LINKS.ths.root}>
                 Tekniska Högskolans Studentkår
-              </Link>{" "}
+              </NavLink>{" "}
               som ansvarar för studentlivet för alla som pluggar på KTH
               Flemingsberg. Vill du veta mer om kåren och hur du kan bli
               engagerad i sektionen kan du läsa mer{" "}
-              <Link component={RouterLink} to="/sektionen" target="_blank">
-                här
-              </Link>
+              <NavLink link={LINKS.internal.sektionen}>här</NavLink>
               .
               <br /> <br />
               Kika gärna in vår{" "}
-              <Link
-                component={RouterLink}
-                to="https://linktr.ee/isflemingsberg"
-                target="_blank"
-              >
-                LinkTree
-              </Link>{" "}
-              och följ oss på våra sociala medier för att få de senaste
-              uppdateringarna.
+              <NavLink link={LINKS.social.linktree}>LinkTree</NavLink> och följ
+              oss på våra sociala medier för att få de senaste uppdateringarna.
             </Typography>
 
             <Stack
@@ -107,7 +88,7 @@ export default function Home() {
               ml={{ xs: "1rem" }}
             >
               <IconButton
-                href="https://www.facebook.com/isflemingsberg/"
+                href={LINKS.social.facebook.href}
                 target="_blank"
                 aria-label="Facebook"
                 disableRipple
@@ -121,7 +102,7 @@ export default function Home() {
               </IconButton>
 
               <IconButton
-                href="https://instagram.com/isflemingsberg"
+                href={LINKS.social.instagram.href}
                 target="_blank"
                 aria-label="Instagram"
                 disableRipple
@@ -135,7 +116,7 @@ export default function Home() {
               </IconButton>
 
               <IconButton
-                href="https://www.linkedin.com/company/ingsekt"
+                href={LINKS.social.linkedin.href}
                 target="_blank"
                 aria-label="LinkedIn"
                 disableRipple
@@ -159,7 +140,7 @@ export default function Home() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            />
           </Box>
         </Stack>
       </Box>

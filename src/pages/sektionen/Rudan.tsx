@@ -1,7 +1,8 @@
-import { Divider, Typography, Link } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import rudan from "../../assets/sektionen/rudan.webp";
-import { Link as RouterLink } from "react-router-dom";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
+import NavLink from "../../components/util/NavLink";
+import { LINKS } from "../../config/links";
 
 export default function Rudan() {
   return (
@@ -22,29 +23,25 @@ export default function Rudan() {
         <br />
         <br />
         På fredagskvällar förvandlas lokalen till pub när{" "}
-        <Link component={RouterLink} to="/qm">
-          FISQ
-        </Link>{" "}
-        öppnar baren och bjuder in till en värdig (och ibland ovärdig)
-        avslutning på pluggveckan. Dagtid fungerar Rudan som studielokal,
-        lunchhäng och allmänt andningshål, komplett med kök och ett helt gäng
-        mikrovågsugnar för den som lever på matlådor.
+        <NavLink link={LINKS.internal.qm}>FISQ</NavLink> öppnar baren och bjuder
+        in till en värdig (och ibland ovärdig) avslutning på pluggveckan. Dagtid
+        fungerar Rudan som studielokal, lunchhäng och allmänt andningshål,
+        komplett med kök och ett helt gäng mikrovågsugnar för den som lever på
+        matlådor.
         <br />
         <br />
         Rudan delas också med{" "}
-        <Link component={RouterLink} to="https://mit-kth.se/" target="_blank">
+        <NavLink link={LINKS.mit.root}>
           Sektionen för Medicinsk teknik (MiT)
-        </Link>{" "}
+        </NavLink>{" "}
         och{" "}
-        <Link component={RouterLink} to="https://www.rkh.se/" target="_blank">
+        <NavLink link={LINKS.rkh.root}>
           Röda Korsets Högskolas Studentkår (RKHSK)
-        </Link>
+        </NavLink>
         , vilket betyder att du rätt ofta stöter på både ingenjörer,
         medteknologer och sjuksköterskestudenter i samma soffa.{" "}
-        <Link component={RouterLink} to="/lokalansvarig">
-          Lokalansvarig
-        </Link>{" "}
-        ser till att Rudan faktiskt går att vistas i: skötsel, inköp och allmänt
+        <NavLink link={LINKS.internal.lokalnamnden}>Lokalansvarig</NavLink> ser
+        till att Rudan faktiskt går att vistas i: skötsel, inköp och allmänt
         ordningskaos hanteras löpande.
       </Typography>
 
@@ -61,10 +58,7 @@ export default function Rudan() {
         När du tröttnat på föreläsningsslides och grupparbeten finns det gott om
         sätt att prokrastinera värdigt i Rudan. Här finns både biljardbord och
         pingisbord, och dessutom tillgång till bordsspel och tv-spel (Wii, PS3,
-        PS4) som{" "}
-        <Link component={RouterLink} to="/spruppen">
-          SPRUPPEN
-        </Link>{" "}
+        PS4) som <NavLink link={LINKS.internal.spelgruppen}>SPRUPPEN</NavLink>{" "}
         köper in till sektionen.
         <br />
         <br />

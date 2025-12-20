@@ -1,6 +1,7 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import SquareButton from "../../components/buttons/SquareButton";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
+import { LINKS } from "../../config/links";
 
 export default function Sektionsmoten() {
   return (
@@ -30,7 +31,7 @@ export default function Sektionsmoten() {
           gap: 2,
         }}
       >
-        <SquareButton to="/styrdokument" fontSize="1.2em">
+        <SquareButton link={LINKS.internal.styrdokument} fontSize="1.2em">
           möteshandlingar och protokoll
         </SquareButton>
       </Box>

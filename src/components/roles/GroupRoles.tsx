@@ -1,8 +1,8 @@
-import { Link, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import type { Group } from "../../types/chapter";
 import { rolesConfig } from "../../config/rolesConfig";
 import RoleItem from "./RoleItem";
-import { Link as RouterLink } from "react-router-dom";
+import NavLink from "../util/NavLink";
 
 type GroupRolesProps = {
   group?: Group;
@@ -58,9 +58,9 @@ export default function GroupRoles({
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             Kontakt
           </Typography>
-          <Link component={RouterLink} to={`mailto:${foundGroup?.contact}`}>
+          <NavLink link={{ href: `mailto:${foundGroup?.contact}` }}>
             {foundGroup?.contact}
-          </Link>
+          </NavLink>
         </Stack>
       )}
     </Stack>

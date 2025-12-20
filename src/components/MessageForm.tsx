@@ -72,7 +72,9 @@ export default function MessageForm({
           helperText="(krävs)"
         />
 
-        <SquareButton fullWidth type="submit">Skicka</SquareButton>
+        <SquareButton fullWidth type="submit">
+          Skicka
+        </SquareButton>
       </Stack>
     </Box>
   );
