@@ -72,6 +72,10 @@ export const LINKS = {
   // -----------------
   social: {
     // Sektionen
+    discord: {
+      href: "https://discord.gg/qTj7QBJcU4",
+      remote: true,
+    },
     instagram: {
       href: "https://instagram.com/isflemingsberg",
       remote: true,

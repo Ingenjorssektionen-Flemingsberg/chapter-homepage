@@ -100,7 +100,7 @@ export const MOCK_NEWS: NewsPostType[] = [
         {
           type: "paragraph",
           data: {
-            text: "Har du några funderingar kan du kontakta oss via:\n• Facebook\n• Instagram\n• Discord\n\nDu kan också maila oss:\nstyrelsen@isflemingsberg.se\n\nVi ses!\nIngenjörssektionen Flemingsberg",
+            text: "Har du några funderingar kan du kontakta oss via:\n• [Facebook](https://www.facebook.com/isflemingsberg/)\n• [Instagram](https://www.instagram.com/isflemingsberg/?hl=en)\n• [Discord](https://discord.gg/qTj7QBJcU4)\n\nDu kan också maila oss:\nstyrelsen@isflemingsberg.se\n\nVi ses!\nIngenjörssektionen Flemingsberg",
           },
         },
         {

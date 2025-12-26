@@ -1,4 +1,3 @@
-import { Box, CircularProgress } from "@mui/material";
 import React, { useState, createContext, useContext, useMemo } from "react";
 import type { SetStateAction } from "react";
 
@@ -18,27 +17,6 @@ export const useLoading = () => {
   return context;
 };
 
-const Loader: React.FC = () => {
-  return (
-    <Box
-      sx={{
-        position: "fixed", // cover entire viewport
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: "rgba(0, 0, 0, 0.4)", // dark overlay
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 9999, // higher than most elements (matches MUI modal z-index)
-      }}
-    >
-      <CircularProgress sx={{ color: "white" }} />
-    </Box>
-  );
-};
-
 export const LoadingProvider = ({
   children,
 }: {
@@ -51,15 +29,10 @@ export const LoadingProvider = ({
       loading: loading,
       setLoading: setLoading,
     }),
-    [loading, setLoading],
+    [loading, setLoading]
   );
 
   return (
-    <LoadingContext.Provider value={value}>
-      <>
-        {loading && <Loader />}
-        {children}
-      </>
-    </LoadingContext.Provider>
+    <LoadingContext.Provider value={value}>{children}</LoadingContext.Provider>
   );
 };

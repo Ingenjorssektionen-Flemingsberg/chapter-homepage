@@ -30,6 +30,10 @@ import InfoFlemingsberg from "./pages/nyantagen/InfoFlemingsberg";
 import JoinSektionen from "./pages/nyantagen/JoinSektionen";
 import SektionenVerksamhet from "./pages/nyantagen/SektionenVerksamhet";
 import News from "./pages/News";
+import AdminNews from "./pages/AdminNews";
+import Contact from "./pages/Contact";
+
+const isAdmin = true; // TODO: replace with real auth logic
 
 export const routes: RouteObject[] = [
   {
@@ -37,8 +41,13 @@ export const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+
+      ...(isAdmin ? [{ path: "/admin", element: <AdminNews /> }] : []),
+
       { path: "/event", element: <Event /> },
       { path: "/nyheter", element: <News /> },
+      { path: "/kontakt", element: <Contact /> },
+
       // Sektionen
       { path: "/sektionen", element: <Sektionen /> },
       { path: "/rudan", element: <Rudan /> },

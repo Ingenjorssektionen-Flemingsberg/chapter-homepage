@@ -12,29 +12,26 @@ export default function Home() {
   const { theme } = useTheme();
 
   return (
-    <>
-      <Container
-        disableGutters
-        sx={{
-          minHeight: "100vh",
-          minWidth: "100vw",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <HeroBanner
-          image={banner}
-          subtitle="Välkommen till"
-          title={
-            <>
-              INGENJÖRSSEKTIONEN <br /> FLEMINGSBERG
-            </>
-          }
-        />
-      </Container>
+    <Container
+      disableGutters
+      sx={{
+        minHeight: "100vh",
+        minWidth: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <HeroBanner
+        image={banner}
+        subtitle="Välkommen till"
+        title={
+          <>
+            INGENJÖRSSEKTIONEN <br /> FLEMINGSBERG
+          </>
+        }
+      />
 
-      {/* About Section */}
       <Box
         sx={{
           py: { xs: 6, md: 10 },
@@ -144,6 +141,6 @@ export default function Home() {
           </Box>
         </Stack>
       </Box>
-    </>
+    </Container>
   );
 }

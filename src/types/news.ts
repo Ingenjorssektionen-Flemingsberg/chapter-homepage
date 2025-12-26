@@ -1,4 +1,4 @@
-export type NewsBlock =
+export type NewsBlockType =
   | {
       type: "paragraph";
       data: {
@@ -23,6 +23,6 @@ export type NewsPostType = {
   status: "draft" | "published";
   summary?: string | null;
   content: {
-    blocks: NewsBlock[];
+    blocks: NewsBlockType[];
   };
 };

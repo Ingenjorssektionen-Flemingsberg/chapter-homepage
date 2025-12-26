@@ -59,6 +59,13 @@ const darkTheme = createTheme({
       },
     },
 
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: "#FFF",
+        },
+      },
+    },
     MuiTableHead: {
       styleOverrides: {
         root: { backgroundColor: "#2A1412" },
@@ -131,7 +138,7 @@ const lightTheme = createTheme({
 
     background: {
       default: "#FFFFFF",
-      paper: "#FFFFFF",
+      paper: "#FAF8F1",
     },
 
     onBackground: OKRAROD,

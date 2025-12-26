@@ -7,6 +7,7 @@ export interface Role {
 export interface Group {
   name: string;
   contact?: string;
+  primaryRoles?: string[];
   roles: Role[];
 }
 

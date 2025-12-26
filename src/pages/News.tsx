@@ -1,31 +1,16 @@
-import { Container, Button, Box } from "@mui/material";
+import { Container, Box, Paper, Typography } from "@mui/material";
 import HeroBanner from "../components/HeroBanner";
 import NewsPost from "../components/news/NewsPost";
-// import { useNews } from "../contexts/";
 import newsBanner from "../assets/news.webp";
-import { MOCK_NEWS } from "../config/mock";
 import type { NewsPostType } from "../types/news";
 import { useInfiniteScroll } from "../components/news/useInfiniteScroll";
-import { useState } from "react";
 import NewsPostSkeleton from "../components/news/NewsPostSkeleton";
+import { useNews } from "../contexts/NewsContext";
 
 export default function News() {
-  // const { news, getMoreNews, hasMore } = useNews();
-  const news = MOCK_NEWS;
-  const hasMore = true;
-  const [isLoading, setIsLoading] = useState(false);
+  const { news, hasMore, loading, getMoreNews } = useNews();
 
-  const getMoreNews = () => {
-    if (isLoading) return;
-
-    setIsLoading(true);
-
-    setTimeout(() => {
-      // append mock news here
-      setIsLoading(false);
-    }, 5000);
-  };
-  const sentinelRef = useInfiniteScroll(getMoreNews, hasMore && !isLoading);
+  const sentinelRef = useInfiniteScroll(getMoreNews, hasMore && !loading);
 
   return (
     <Container
@@ -48,14 +33,35 @@ export default function News() {
       <Box
         sx={{
           my: 6,
-          mx: "auto",
+          mx: { xs: 2, md: "auto" },
         }}
       >
+        {!loading && news.length === 0 && (
+          <Paper
+            elevation={0}
+            sx={{
+              px: 3,
+              py: 2.5,
+              mt: 4,
+              textAlign: "center",
+              color: "text.secondary",
+              border: "1px dashed",
+              borderColor: "divider",
+              borderRadius: 3,
+            }}
+          >
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Inga nyheter ännu
+            </Typography>
+            <Typography variant="body2">No news 😔</Typography>
+          </Paper>
+        )}
+
         {news.map((post: NewsPostType) => (
           <NewsPost key={post.id} post={post} />
         ))}
 
-        {isLoading &&
+        {loading &&
           Array.from({ length: 2 }).map((_) => (
             <NewsPostSkeleton key={`skeleton`} />
           ))}

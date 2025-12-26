@@ -1,6 +1,11 @@
 chapter:
   - name: Styrelsen
     contact: sytrelsen@isflemingsberg.se
+    primaryRoles:
+      - Sektionsordförande
+      - Vice Sektionsordförande
+      - JML-ansvarig
+      - Studienämndens Ordförande
     roles:
       - name: Sektionsordförande
         contact: ordf@isflemingsberg.se
@@ -21,16 +26,27 @@ chapter:
 
   - name: Mottagningsgruppen
     contact: mogen@isflemingsberg.se
+    primaryRoles:
+      - Gudfadder
     roles:
       - name: Gudfadder
         members: [William Ramberg]
       - name: Vice Gudfadder
-        members: [Engla Lundin, Tuva Svanström, Patryk Kondratowicz, Emelie Olsson, Aida Lagumdzija, Þráinn Þórisson]
+        members:
+          [
+            Engla Lundin,
+            Tuva Svanström,
+            Patryk Kondratowicz,
+            Emelie Olsson,
+            Aida Lagumdzija,
+            Þráinn Þórisson,
+          ]
       - name: Mottagningskassör
         members: [Riff Bravo]
 
   - name: Talsmanspresidiet
     contact: talman@isflemingsberg.se
+      - Talman
     roles:
       - name: Talman
         members: [Axel Åström]
@@ -54,6 +70,8 @@ chapter:
 
   - name: Qlubbmästeriet
     contact: qm@isflemingsberg.se
+    primaryRoles:
+      - Qlubbmästare
     roles:
       - name: Qlubbmästare
         members: [Leo Au]
@@ -64,6 +82,8 @@ chapter:
 
   - name: Företagsgruppen
     contact: fg@isflemingsberg.se
+    primaryRoles:
+      - Företagsgruppens Ordförande
     roles:
       - name: Företagsgruppens Ordförande
         members: [Melissa Yasar]
@@ -72,6 +92,8 @@ chapter:
 
   - name: Valberedningen
     contact: valberedning@isflemingsberg.se
+    primaryRoles:
+      - Valberedningens Ordförande
     roles:
       - name: Valberedningens Ordförande
         members: [Johan Gripenhall]

@@ -13,6 +13,7 @@ const Role = z.object({
 const Group = z.object({
   name: z.string(),
   contact: z.string().optional(),
+  primaryRoles: z.array(z.string()).optional(),
   roles: z.array(Role).default([]),
 });
 

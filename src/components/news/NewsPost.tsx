@@ -1,46 +1,11 @@
-import { Box, Chip, Divider, Link, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import type { NewsPostType } from "../../types/news";
+import { formatDate } from "../util/formatDate";
+import { renderTextWithLinks } from "../util/RichLinkText";
 
 type Props = {
   post: NewsPostType;
 };
-
-const URL_REGEX = /\bhttps?:\/\/[^\s]+/g;
-
-function renderTextWithLinks(text: string) {
-  const parts = text.split(URL_REGEX);
-  const matches = text.match(URL_REGEX) ?? [];
-
-  return parts.flatMap((part, index) => {
-    const elements = [<span key={`text-${matches[index]}`}>{part}</span>];
-
-    if (matches[index]) {
-      elements.push(
-        <Link
-          key={`link-${matches[index]}`}
-          href={matches[index]}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{ wordBreak: "break-word" }}
-        >
-          {matches[index]}
-        </Link>
-      );
-    }
-
-    return elements;
-  });
-}
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "";
-  return d.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
 
 export default function NewsPost({ post }: Readonly<Props>) {
   const dateLabel = formatDate(post.published_at ?? post.created_at);
@@ -70,37 +35,12 @@ export default function NewsPost({ post }: Readonly<Props>) {
           variant="h5"
           sx={{
             fontWeight: 750,
-            letterSpacing: "-0.02em",
-            lineHeight: 1.2,
             mb: 1,
           }}
         >
           {post.title}
         </Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1.25,
-            flexWrap: "wrap",
-          }}
-        >
-          <Typography variant="body2" color="text.secondary">
-            {dateLabel}
-          </Typography>
-
-          {post.status === "draft" && (
-            <Chip size="small" label="Utkast" variant="outlined" />
-          )}
-        </Box>
-      </Box>
-
-      <Divider />
-
-      {/* Content */}
-      <Box sx={{ px: { xs: 2.5, sm: 4 }, py: { xs: 2.5, sm: 3 } }}>
-        {/* Summar */}
         {post.summary && (
           <Typography
             variant="body1"
@@ -115,7 +55,15 @@ export default function NewsPost({ post }: Readonly<Props>) {
           </Typography>
         )}
 
-        {/* Body Content: Text & Images */}
+        <Typography variant="body2" color="text.secondary">
+          {dateLabel}
+        </Typography>
+      </Box>
+
+      <Divider />
+
+      {/* Content */}
+      <Box sx={{ px: { xs: 2.5, sm: 4 }, py: { xs: 2.5, sm: 3 } }}>
         {post.content.blocks.map((block, idx) => {
           const key = `${post.id}-${block.type}-${idx}`;
 
