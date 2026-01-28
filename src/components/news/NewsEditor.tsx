@@ -17,14 +17,14 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import AddIcon from "@mui/icons-material/Add";
 
-import type { NewsPostType, NewsBlockType } from "../../types/news";
+import type { Post, ContentBlock } from "../../types/news";
 
 type Props = {
-  value: NewsPostType;
-  onChange: (next: NewsPostType) => void;
+  value: Post;
+  onChange: (next: Post) => void;
 };
 
-type BlockWithId = NewsBlockType & { id: string };
+type BlockWithId = ContentBlock & { id: string };
 
 function move<T>(arr: T[], from: number, to: number) {
   const copy = [...arr];
@@ -155,10 +155,10 @@ export default function NewsEditor({ value, onChange }: Readonly<Props>) {
   }));
 
   const setField = useCallback(
-    <K extends keyof NewsPostType>(key: K, v: NewsPostType[K]) => {
+    <K extends keyof Post>(key: K, v: Post[K]) => {
       onChange({ ...value, [key]: v });
     },
-    [onChange, value]
+    [onChange, value],
   );
 
   const setBlocks = useCallback(
@@ -168,14 +168,14 @@ export default function NewsEditor({ value, onChange }: Readonly<Props>) {
         content: { ...value.content, blocks: nextBlocks },
       });
     },
-    [onChange, value]
+    [onChange, value],
   );
 
   const updateBlock = useCallback(
     (index: number, next: BlockWithId) => {
       setBlocks(blocks.map((b, i) => (i === index ? next : b)));
     },
-    [blocks, setBlocks]
+    [blocks, setBlocks],
   );
 
   const addParagraph = useCallback(() => {
@@ -198,17 +198,17 @@ export default function NewsEditor({ value, onChange }: Readonly<Props>) {
 
   const removeBlock = useCallback(
     (index: number) => setBlocks(blocks.filter((_, i) => i !== index)),
-    [blocks, setBlocks]
+    [blocks, setBlocks],
   );
 
   const moveUp = useCallback(
     (idx: number) => setBlocks(move(blocks, idx, idx - 1)),
-    [blocks, setBlocks]
+    [blocks, setBlocks],
   );
 
   const moveDown = useCallback(
     (idx: number) => setBlocks(move(blocks, idx, idx + 1)),
-    [blocks, setBlocks]
+    [blocks, setBlocks],
   );
 
   return (

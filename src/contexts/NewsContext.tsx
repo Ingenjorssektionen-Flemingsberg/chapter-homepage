@@ -1,16 +1,22 @@
 import { createContext, useContext, useState, useMemo } from "react";
 import { useNotification } from "./NotificationContext";
-import type { NewsPostType } from "../types/news";
+import type { Post } from "../types/news";
 import type { Pagination } from "../types/pagination";
-import { MOCK_NEWS } from "../config/mock";
+import {
+  createPost,
+  deletePost,
+  getPosts,
+  updatePost,
+} from "../services/newsService";
+import { useAuth } from "./AuthContext";
 
 interface NewsContextType {
-  news: NewsPostType[];
+  news: Post[];
   hasMore: boolean;
   loading: boolean;
   getMoreNews: () => Promise<void>;
-  postNews: (newsPost: NewsPostType) => Promise<void>;
-  updateNews: (newsPost: NewsPostType) => Promise<void>;
+  postNews: (newsPost: Post) => Promise<void>;
+  updateNews: (newsPost: Post) => Promise<void>;
   deleteNews: (id: string) => Promise<void>;
 }
 
@@ -26,26 +32,18 @@ export const useNews = () => {
 };
 
 export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [news, setNews] = useState<NewsPostType[]>(MOCK_NEWS);
+  const [news, setNews] = useState<Post[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const { showNotification } = useNotification();
-
-  const sleep = (ms: number) =>
-    new Promise<void>((resolve) => setTimeout(resolve, ms));
+  const { token } = useAuth();
 
   const getMoreNewsFunc = async () => {
     if (loading) return;
 
     try {
       setLoading(true);
-      const resp: Pagination<NewsPostType> = {
-        limit: 11,
-        offset: 0,
-        posts: [],
-        total: 10,
-      }; // = await getNews(...);
-      await sleep(5000);
+      const resp: Pagination<Post> = await getPosts(10, news.length);
       setNews([...news, ...resp.posts]);
       setHasMore(resp.total > resp.offset + resp.limit);
     } catch (err) {
@@ -55,12 +53,18 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
     setLoading(false);
   };
 
-  const postNewsFunc = async (newsPost: NewsPostType) => {
-    if (loading) return;
+  const postNewsFunc = async (newsPost: Post) => {
+    if (loading || !token) return;
 
     try {
       setLoading(true);
-      const createdNews: NewsPostType = newsPost; // = await postNews(...);
+      const createdNews: Post = await createPost(token, {
+        slug: newsPost.slug,
+        title: newsPost.title,
+        summary: newsPost.summary ?? "",
+        content: newsPost.content,
+        status: newsPost.status,
+      });
       setNews([...news, createdNews]);
     } catch (err) {
       console.error("postNews: " + err);
@@ -69,14 +73,21 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
     setLoading(false);
   };
 
-  const updateNewsFunc = async (newsPost: NewsPostType) => {
-    if (loading) return;
+  const updateNewsFunc = async (newsPost: Post) => {
+    if (loading || !token) return;
 
     try {
       setLoading(true);
-      const updatedNews: NewsPostType = newsPost; // = await updateNews(...);
+      const updatedNews: Post = await updatePost(token, newsPost.id, {
+        slug: newsPost.slug,
+        title: newsPost.title,
+        summary: newsPost.summary ?? "",
+        content: newsPost.content,
+        status: newsPost.status,
+      });
+
       setNews((prev) =>
-        prev.map((n) => (n.id === updatedNews.id ? updatedNews : n))
+        prev.map((n) => (n.id === updatedNews.id ? updatedNews : n)),
       );
     } catch (err) {
       console.error("updateNews: " + err);
@@ -86,11 +97,11 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const deleteNewsFunc = async (id: string) => {
-    if (loading) return;
+    if (loading || !token) return;
 
     try {
       setLoading(true);
-      // await deleteNews(...);
+      await deletePost(token, id);
       setNews((prev) => prev.filter((n) => n.id !== id));
     } catch (err) {
       console.error("deleteNews: " + err);
@@ -117,7 +128,7 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
       postNewsFunc,
       updateNewsFunc,
       deleteNewsFunc,
-    ]
+    ],
   );
 
   return <NewsContext.Provider value={value}>{children}</NewsContext.Provider>;

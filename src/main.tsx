@@ -41,5 +41,5 @@ createRoot(document.getElementById("root")!).render(
         </BrowserRouter>
       </ThemeProvider>
     </StrictMode>
-  </ReactKeycloakProvider>
+  </ReactKeycloakProvider>,
 );

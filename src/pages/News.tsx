@@ -2,7 +2,7 @@ import { Container, Box, Paper, Typography } from "@mui/material";
 import HeroBanner from "../components/HeroBanner";
 import NewsPost from "../components/news/NewsPost";
 import newsBanner from "../assets/news.webp";
-import type { NewsPostType } from "../types/news";
+import type { Post } from "../types/news";
 import { useInfiniteScroll } from "../components/news/useInfiniteScroll";
 import NewsPostSkeleton from "../components/news/NewsPostSkeleton";
 import { useNews } from "../contexts/NewsContext";
@@ -57,7 +57,7 @@ export default function News() {
           </Paper>
         )}
 
-        {news.map((post: NewsPostType) => (
+        {news.map((post: Post) => (
           <NewsPost key={post.id} post={post} />
         ))}
 

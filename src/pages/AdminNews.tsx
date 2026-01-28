@@ -22,15 +22,16 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
-import type { NewsPostType, NewsBlockType } from "../types/news";
+import type { Post, ContentBlock } from "../types/news";
 import NewsPost from "../components/news/NewsPost";
 import NewsEditor from "../components/news/NewsEditor";
 import { useInfiniteScroll } from "../components/news/useInfiniteScroll";
 import { useNews } from "../contexts/NewsContext";
 import Logout from "@mui/icons-material/Logout";
 import { useAuth } from "../contexts/AuthContext";
+import { formatDate } from "../components/util/formatDate";
 
-function makeEmptyPost(): NewsPostType {
+function makeEmptyPost(): Post {
   const created = new Date().toISOString();
   return {
     id: crypto.randomUUID(),
@@ -39,10 +40,10 @@ function makeEmptyPost(): NewsPostType {
     status: "draft",
     summary: "",
     created_at: created,
-    updated_at: created,
+    updatedAt: created,
     published_at: undefined,
     content: {
-      blocks: [{ type: "paragraph", data: { text: "" } } as NewsBlockType],
+      blocks: [{ type: "paragraph", data: { text: "" } } as ContentBlock],
     },
   };
 }
@@ -61,19 +62,19 @@ export default function AdminNews() {
   const sentinelRef = useInfiniteScroll(getMoreNews, hasMore && !loading);
 
   const [selectedId, setSelectedId] = useState<string | null>(
-    news[0]?.id ?? null
+    news[0]?.id ?? null,
   );
 
   const selected = useMemo(
     () => news.find((p) => p.id === selectedId) ?? null,
-    [news, selectedId]
+    [news, selectedId],
   );
 
   const [editorOpen, setEditorOpen] = useState(false);
-  const [editing, setEditing] = useState<NewsPostType | null>(null);
+  const [editing, setEditing] = useState<Post | null>(null);
 
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState<NewsPostType | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<Post | null>(null);
 
   const [create, setCreate] = useState<boolean>(false);
 
@@ -86,22 +87,22 @@ export default function AdminNews() {
     setEditorOpen(true);
   }
 
-  function openEdit(post: NewsPostType) {
+  function openEdit(post: Post) {
     // clone to avoid mutating list while editing
     setEditing(structuredClone(post));
     setEditorOpen(true);
   }
 
-  function upsertPost(next: NewsPostType) {
+  function upsertPost(next: Post) {
     const updatedAt = new Date().toISOString();
 
     const title = next.title.trim();
 
-    const normalized: NewsPostType = {
+    const normalized: Post = {
       ...next,
       title,
       slug: "",
-      updated_at: updatedAt,
+      updatedAt: updatedAt,
       published_at:
         next.status === "published"
           ? (next.published_at ?? updatedAt)
@@ -115,7 +116,7 @@ export default function AdminNews() {
     setSelectedId(normalized.id);
   }
 
-  function askDelete(post: NewsPostType) {
+  function askDelete(post: Post) {
     setDeleteTarget(post);
     setConfirmDeleteOpen(true);
   }
@@ -206,9 +207,7 @@ export default function AdminNews() {
           <List disablePadding>
             {news.map((p) => {
               const isSelected = p.id === selectedId;
-              const date = new Date(
-                p.published_at ?? p.created_at
-              ).toLocaleDateString();
+              const date = formatDate(p.updatedAt ?? p.created_at);
 
               return (
                 <ListItem

@@ -1,10 +1,10 @@
 import { Box, Divider, Typography } from "@mui/material";
-import type { NewsPostType } from "../../types/news";
+import type { Post } from "../../types/news";
 import { formatDate } from "../util/formatDate";
 import { renderTextWithLinks } from "../util/RichLinkText";
 
 type Props = {
-  post: NewsPostType;
+  post: Post;
 };
 
 export default function NewsPost({ post }: Readonly<Props>) {
