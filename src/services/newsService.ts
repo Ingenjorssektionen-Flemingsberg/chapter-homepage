@@ -6,11 +6,13 @@ import type { Post, CreatePostRequest } from "../types/news";
  * List posts (paginated)
  */
 export const getPosts = async (
+  token: string | undefined,
   limit = 20,
   offset = 0,
 ): Promise<Pagination<Post>> => {
   const response = await apiClient.get<Pagination<Post>>("/posts", {
     params: { limit, offset },
+    headers: token ? { Authorization: "Bearer " + token } : undefined,
   });
 
   return response.data;
@@ -57,6 +59,18 @@ export const updatePost = async (
  */
 export const deletePost = async (token: string, id: string): Promise<void> => {
   await apiClient.delete(`/posts/${id}`, {
+    headers: { Authorization: "Bearer " + token },
+  });
+};
+
+/**
+ * Unarchive a post (optional)
+ */
+export const unarchivePost = async (
+  token: string,
+  id: string,
+): Promise<void> => {
+  await apiClient.patch(`/posts/${id}/unarchive`, undefined, {
     headers: { Authorization: "Bearer " + token },
   });
 };

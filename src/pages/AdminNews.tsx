@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Box,
   Button,
@@ -30,6 +30,12 @@ import { useNews } from "../contexts/NewsContext";
 import Logout from "@mui/icons-material/Logout";
 import { useAuth } from "../contexts/AuthContext";
 import { formatDate } from "../components/util/formatDate";
+import {
+  Archive,
+  ArchiveOutlined,
+  Unarchive,
+  UnarchiveOutlined,
+} from "@mui/icons-material";
 
 function makeEmptyPost(): Post {
   const created = new Date().toISOString();
@@ -57,17 +63,29 @@ export default function AdminNews() {
     postNews,
     updateNews,
     deleteNews,
+    unarchiveNews,
   } = useNews();
+  const [listFilter, setListFilter] = useState<"all" | "archived">("all");
+  const [listedNews, setListedNews] = useState<Post[]>([]);
+  useEffect(() => {
+    setListedNews(
+      news.filter((post) =>
+        listFilter === "all"
+          ? post.status !== "archived"
+          : post.status === "archived",
+      ),
+    );
+  }, [news, listFilter]);
 
   const sentinelRef = useInfiniteScroll(getMoreNews, hasMore && !loading);
 
   const [selectedId, setSelectedId] = useState<string | null>(
-    news[0]?.id ?? null,
+    listedNews[0]?.id ?? null,
   );
 
   const selected = useMemo(
-    () => news.find((p) => p.id === selectedId) ?? null,
-    [news, selectedId],
+    () => listedNews.find((p) => p.id === selectedId) ?? null,
+    [listedNews, selectedId],
   );
 
   const [editorOpen, setEditorOpen] = useState(false);
@@ -75,6 +93,9 @@ export default function AdminNews() {
 
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<Post | null>(null);
+
+  const [confirmUnarchiveOpen, setConfirmUnarchiveOpen] = useState(false);
+  const [unarchiveTarget, setUnarchiveTarget] = useState<Post | null>(null);
 
   const [create, setCreate] = useState<boolean>(false);
 
@@ -119,6 +140,19 @@ export default function AdminNews() {
   function askDelete(post: Post) {
     setDeleteTarget(post);
     setConfirmDeleteOpen(true);
+  }
+
+  function askUnarchive(post: Post) {
+    setUnarchiveTarget(post);
+    setConfirmUnarchiveOpen(true);
+  }
+
+  function doUnarchive() {
+    if (!unarchiveTarget) return;
+    unarchiveNews(unarchiveTarget.id);
+    setSelectedId((prev) => (prev === unarchiveTarget.id ? null : prev));
+    setConfirmUnarchiveOpen(false);
+    setUnarchiveTarget(null);
   }
 
   function doDelete() {
@@ -196,6 +230,15 @@ export default function AdminNews() {
               Alla inlägg
             </Typography>
             <Button
+              startIcon={<Archive />}
+              variant="contained"
+              onClick={() =>
+                setListFilter(listFilter === "all" ? "archived" : "all")
+              }
+            >
+              {listFilter === "all" ? "Archive" : "Alla"}
+            </Button>
+            <Button
               startIcon={<AddIcon />}
               variant="contained"
               onClick={openCreate}
@@ -205,7 +248,7 @@ export default function AdminNews() {
           </Box>
 
           <List disablePadding>
-            {news.map((p) => {
+            {listedNews.map((p) => {
               const isSelected = p.id === selectedId;
               const date = formatDate(p.updatedAt ?? p.created_at);
 
@@ -215,20 +258,32 @@ export default function AdminNews() {
                   disablePadding
                   secondaryAction={
                     <Stack direction="row" spacing={0.5}>
-                      <IconButton
-                        edge="end"
-                        onClick={() => openEdit(p)}
-                        aria-label="edit"
-                      >
-                        <EditOutlinedIcon />
-                      </IconButton>
-                      <IconButton
-                        edge="end"
-                        onClick={() => askDelete(p)}
-                        aria-label="delete"
-                      >
-                        <DeleteOutlineIcon />
-                      </IconButton>
+                      {listFilter === "all" ? (
+                        <>
+                          <IconButton
+                            edge="end"
+                            onClick={() => openEdit(p)}
+                            aria-label="edit"
+                          >
+                            <EditOutlinedIcon />
+                          </IconButton>
+                          <IconButton
+                            edge="end"
+                            onClick={() => askDelete(p)}
+                            aria-label="delete"
+                          >
+                            <ArchiveOutlined />
+                          </IconButton>
+                        </>
+                      ) : (
+                        <IconButton
+                          edge="end"
+                          onClick={() => askUnarchive(p)}
+                          aria-label="edit"
+                        >
+                          <UnarchiveOutlined />
+                        </IconButton>
+                      )}
                     </Stack>
                   }
                 >
@@ -331,7 +386,7 @@ export default function AdminNews() {
         maxWidth="md"
       >
         <DialogTitle sx={{ fontWeight: 800 }}>
-          {editing && news.some((p) => p.id === editing.id)
+          {editing && listedNews.some((p) => p.id === editing.id)
             ? "Redigera nyhet"
             : "Skapa nyhet"}
         </DialogTitle>
@@ -363,17 +418,37 @@ export default function AdminNews() {
         open={confirmDeleteOpen}
         onClose={() => setConfirmDeleteOpen(false)}
       >
-        <DialogTitle sx={{ fontWeight: 800 }}>Ta bort nyhet?</DialogTitle>
+        <DialogTitle sx={{ fontWeight: 800 }}>Arkviera nyhet?</DialogTitle>
         <DialogContent dividers>
           <Typography>
-            Är du säker att du vill ta bort{" "}
+            Är du säker att du vill arkivera{" "}
             <strong>{deleteTarget?.title || "detta inlägg"}</strong>?
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setConfirmDeleteOpen(false)}>Avbryt</Button>
           <Button variant="contained" color="error" onClick={doDelete}>
-            Ta bort
+            Arkivera
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Delete confirm */}
+      <Dialog
+        open={confirmUnarchiveOpen}
+        onClose={() => setConfirmUnarchiveOpen(false)}
+      >
+        <DialogTitle sx={{ fontWeight: 800 }}>Avarkivera nyhet?</DialogTitle>
+        <DialogContent dividers>
+          <Typography>
+            Är du säker att du vill avarkivera{" "}
+            <strong>{deleteTarget?.title || "detta inlägg"}</strong>?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmUnarchiveOpen(false)}>Avbryt</Button>
+          <Button variant="contained" color="error" onClick={doUnarchive}>
+            Avarkivera
           </Button>
         </DialogActions>
       </Dialog>

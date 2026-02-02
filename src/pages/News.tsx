@@ -6,9 +6,20 @@ import type { Post } from "../types/news";
 import { useInfiniteScroll } from "../components/news/useInfiniteScroll";
 import NewsPostSkeleton from "../components/news/NewsPostSkeleton";
 import { useNews } from "../contexts/NewsContext";
+import { useEffect, useState } from "react";
 
 export default function News() {
   const { news, hasMore, loading, getMoreNews } = useNews();
+  const [publishedNews, setPublishedNews] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const filteredNews = news.filter(
+      (post) =>
+        post.status === "published" &&
+        new Date(post.published_at!) <= new Date(),
+    );
+    setPublishedNews(filteredNews);
+  }, [news]);
 
   const sentinelRef = useInfiniteScroll(getMoreNews, hasMore && !loading);
 
@@ -36,7 +47,7 @@ export default function News() {
           mx: { xs: 2, md: "auto" },
         }}
       >
-        {!loading && news.length === 0 && (
+        {!loading && publishedNews.length === 0 && (
           <Paper
             elevation={0}
             sx={{
@@ -57,7 +68,7 @@ export default function News() {
           </Paper>
         )}
 
-        {news.map((post: Post) => (
+        {publishedNews.map((post: Post) => (
           <NewsPost key={post.id} post={post} />
         ))}
 

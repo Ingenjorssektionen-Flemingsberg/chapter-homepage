@@ -6,6 +6,7 @@ import {
   createPost,
   deletePost,
   getPosts,
+  unarchivePost,
   updatePost,
 } from "../services/newsService";
 import { useAuth } from "./AuthContext";
@@ -18,6 +19,7 @@ interface NewsContextType {
   postNews: (newsPost: Post) => Promise<void>;
   updateNews: (newsPost: Post) => Promise<void>;
   deleteNews: (id: string) => Promise<void>;
+  unarchiveNews: (id: string) => Promise<void>;
 }
 
 const NewsContext = createContext<NewsContextType | undefined>(undefined);
@@ -43,7 +45,7 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
 
     try {
       setLoading(true);
-      const resp: Pagination<Post> = await getPosts(10, news.length);
+      const resp: Pagination<Post> = await getPosts(token, 10, news.length);
       setNews([...news, ...resp.posts]);
       setHasMore(resp.total > resp.offset + resp.limit);
     } catch (err) {
@@ -102,10 +104,28 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       setLoading(true);
       await deletePost(token, id);
-      setNews((prev) => prev.filter((n) => n.id !== id));
+      setNews((prev) =>
+        prev.map((n) => (n.id === id ? { ...n, status: "archived" } : n)),
+      );
     } catch (err) {
       console.error("deleteNews: " + err);
       showNotification("Failed to delete news", "error");
+    }
+    setLoading(false);
+  };
+
+  const unarchiveNewsFunc = async (id: string) => {
+    if (loading || !token) return;
+
+    try {
+      setLoading(true);
+      await unarchivePost(token, id);
+      setNews((prev) =>
+        prev.map((n) => (n.id === id ? { ...n, status: "draft" } : n)),
+      );
+    } catch (err) {
+      console.error("unarchiveNews: " + err);
+      showNotification("Failed to unarchive news", "error");
     }
     setLoading(false);
   };
@@ -119,6 +139,7 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
       postNews: postNewsFunc,
       updateNews: updateNewsFunc,
       deleteNews: deleteNewsFunc,
+      unarchiveNews: unarchiveNewsFunc,
     }),
     [
       news,
@@ -128,6 +149,7 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
       postNewsFunc,
       updateNewsFunc,
       deleteNewsFunc,
+      unarchiveNewsFunc,
     ],
   );
 
