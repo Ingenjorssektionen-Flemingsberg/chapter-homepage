@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import type { GroupWithRoles, RoleWithMembers } from "../types/groups";
 import { useNotification } from "./NotificationContext";
 import { getGroups } from "../services/groups";
@@ -25,17 +32,16 @@ export const GroupProvider = ({ children }: { children: React.ReactNode }) => {
   const [groups, setGroups] = useState<GroupWithRoles[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { showNotification } = useNotification();
-  let { groupIndex, roleIndex } = buildIndexes(groups);
+  const { groupIndex, roleIndex } = useMemo(
+    () => buildIndexes(groups),
+    [groups],
+  );
 
   useEffect(() => {
-    const getGroups = () => {
-      fetchGroups();
-    };
-    getGroups();
-    ({ groupIndex, roleIndex } = buildIndexes(groups));
+    fetchGroups();
   }, []);
 
-  const fetchGroups = async () => {
+  const fetchGroups = useCallback(async () => {
     if (loading) return;
 
     try {
@@ -48,7 +54,7 @@ export const GroupProvider = ({ children }: { children: React.ReactNode }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [loading, showNotification]);
 
   const value = useMemo<GroupContextType>(
     () => ({
