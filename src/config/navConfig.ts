@@ -53,6 +53,7 @@ export const navItems: NavItem[] = [
       // Nämnder
       { label: "Studienämnden", path: "/studienamnden" },
       { label: "JML-nämnden", path: "/jml-namnden" },
+      { label: "Studerande Skyddsombud", path: "/sso" },
       { label: "Valberedningen", path: "/valberedningen" },
       { label: "Lokalnämnden", path: "/lokalnamnden" },
       { label: "Utbytesnämnden", path: "/utbytesnamnden" },

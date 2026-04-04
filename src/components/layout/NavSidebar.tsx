@@ -44,21 +44,30 @@ const NavSidebar: React.FC<NavSidebarProps> = ({ item }) => {
                 py: 0.1,
                 "&:hover": {
                   backgroundColor: "transparent",
+                  textDecoration: "underline",
                 },
               }}
             >
               <ListItemText
                 primary={sub.label}
+                sx={{
+                  textDecoration: globalThis.location.pathname.endsWith(
+                    sub.path,
+                  )
+                    ? "underline"
+                    : "none",
+                }}
                 slotProps={{
                   primary: {
                     fontFamily: "'Open Sans', sans-serif",
                     fontSize: "0.9em",
-                    fontWeight: 400,
+                    fontWeight: globalThis.location.pathname.endsWith(sub.path)
+                      ? 700
+                      : 300,
+
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: globalThis.location.pathname.endsWith(sub.path)
-                      ? "textSecondary"
-                      : "#666",
+                    color: "onPaper",
                   },
                 }}
               />

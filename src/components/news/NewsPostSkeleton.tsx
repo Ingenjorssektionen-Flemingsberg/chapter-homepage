@@ -6,6 +6,7 @@ export default function NewsPostSkeleton() {
       sx={{
         width: "100%",
         maxWidth: 860,
+        minWidth: 860,
         mb: 4,
         borderRadius: 3,
         border: "1px solid",

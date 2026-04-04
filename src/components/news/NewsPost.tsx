@@ -16,6 +16,7 @@ export default function NewsPost({ post }: Readonly<Props>) {
       sx={{
         width: "100%",
         maxWidth: "860px",
+        minWidth: "860px",
         mb: 4,
         borderRadius: 3,
         border: "1px solid",

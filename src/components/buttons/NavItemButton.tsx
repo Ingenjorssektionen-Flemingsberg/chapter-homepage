@@ -87,7 +87,7 @@ const NavItemButton: React.FC<NavItemButtonProps> = ({ item }) => {
             top: "100%",
             left: 0,
             mt: 0,
-            backgroundColor: "#222222",
+            backgroundColor: "background",
             minWidth: 260,
             zIndex: 1300,
             borderRadius: 0,
@@ -117,7 +117,7 @@ const NavItemButton: React.FC<NavItemButtonProps> = ({ item }) => {
                     "&:hover": {
                       backgroundColor: "transparent",
                       "& .MuiListItemText-primary": {
-                        color: "white",
+                        textDecoration: "underline",
                         textShadow: "0 0 1px white",
                       },
                     },
@@ -131,7 +131,7 @@ const NavItemButton: React.FC<NavItemButtonProps> = ({ item }) => {
                         fontSize: "0.8em",
                         letterSpacing: "0.1em",
                         textTransform: "uppercase",
-                        color: "#EEE",
+                        color: "onBackground",
                       },
                     }}
                   />

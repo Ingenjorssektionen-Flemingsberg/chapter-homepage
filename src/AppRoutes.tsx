@@ -31,6 +31,7 @@ import JoinSektionen from "./pages/nyantagen/JoinSektionen";
 import SektionenVerksamhet from "./pages/nyantagen/SektionenVerksamhet";
 import News from "./pages/News";
 import Contact from "./pages/Contact";
+import Sso from "./pages/organ-och-namnder/SSO";
 
 export const routes: RouteObject[] = [
   {
@@ -60,6 +61,7 @@ export const routes: RouteObject[] = [
       { path: "/spelgruppen", element: <Spelgruppen /> },
       { path: "/studienamnden", element: <Studienamnden /> },
       { path: "/jml-namnden", element: <Jml /> },
+      { path: "/sso", element: <Sso /> },
       { path: "/valberedningen", element: <Valberedningen /> },
       { path: "/utbytesnamnden", element: <Utbytesnamnden /> },
       { path: "/lokalnamnden", element: <Lokalnamnden /> },

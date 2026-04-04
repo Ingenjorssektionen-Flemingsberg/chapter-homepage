@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useRef } from "react";
 import { useNotification } from "./NotificationContext";
 import type { Post } from "../types/news";
 import type { Pagination } from "../types/pagination";
@@ -28,9 +28,13 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { showNotification } = useNotification();
 
+  const lastFailedRequest = useRef(0);
+  const COOLDOWN_MS = 5000;
+
   const value = useMemo<NewsContextType>(() => {
     const getMoreNewsFunc = async () => {
-      if (loading) return;
+      if (loading || Date.now() - lastFailedRequest.current < COOLDOWN_MS)
+        return;
 
       try {
         setLoading(true);
@@ -38,10 +42,12 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
         setNews([...news, ...resp.items]);
         setHasMore(resp.total > resp.offset + resp.limit);
       } catch (err) {
+        lastFailedRequest.current = Date.now();
         console.error("getMoreNews: " + err);
         showNotification("Failed to get news", "error");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     return {
