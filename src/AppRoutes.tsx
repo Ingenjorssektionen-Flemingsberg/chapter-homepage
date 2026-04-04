@@ -30,9 +30,7 @@ import InfoFlemingsberg from "./pages/nyantagen/InfoFlemingsberg";
 import JoinSektionen from "./pages/nyantagen/JoinSektionen";
 import SektionenVerksamhet from "./pages/nyantagen/SektionenVerksamhet";
 import News from "./pages/News";
-import AdminNews from "./pages/AdminNews";
 import Contact from "./pages/Contact";
-import { RequireAdmin } from "./components/util/RequireAdmin";
 
 export const routes: RouteObject[] = [
   {
@@ -40,15 +38,6 @@ export const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-
-      {
-        path: "/post",
-        element: (
-          <RequireAdmin>
-            <AdminNews />
-          </RequireAdmin>
-        ),
-      },
 
       { path: "/event", element: <Event /> },
       { path: "/nyheter", element: <News /> },

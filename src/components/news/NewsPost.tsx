@@ -1,21 +1,21 @@
 import { Box, Divider, Typography } from "@mui/material";
 import type { Post } from "../../types/news";
 import { formatDate } from "../util/formatDate";
-import { renderTextWithLinks } from "../util/RichLinkText";
+import { renderTextWithLinks } from "../links/RichLinkText";
 
 type Props = {
   post: Post;
 };
 
 export default function NewsPost({ post }: Readonly<Props>) {
-  const dateLabel = formatDate(post.published_at ?? post.created_at);
+  const dateLabel = formatDate(post.publish_at ?? new Date().toISOString());
 
   return (
     <Box
       component="article"
       sx={{
         width: "100%",
-        maxWidth: 860,
+        maxWidth: "860px",
         mb: 4,
         borderRadius: 3,
         border: "1px solid",
@@ -29,7 +29,6 @@ export default function NewsPost({ post }: Readonly<Props>) {
         textAlign: "left",
       }}
     >
-      {/* Header */}
       <Box sx={{ px: { xs: 2.5, sm: 4 }, pt: { xs: 2.5, sm: 3 }, pb: 2.25 }}>
         <Typography
           variant="h5"
@@ -62,68 +61,71 @@ export default function NewsPost({ post }: Readonly<Props>) {
 
       <Divider />
 
-      {/* Content */}
       <Box sx={{ px: { xs: 2.5, sm: 4 }, py: { xs: 2.5, sm: 3 } }}>
-        {post.content.blocks.map((block, idx) => {
-          const key = `${post.id}-${block.type}-${idx}`;
+        {[...post.blocks]
+          .sort((a, b) => a.position - b.position)
+          .map((block) => {
+            const key = `${post.id}-${block.id}`;
 
-          switch (block.type) {
-            case "paragraph":
-              return (
-                <Typography
-                  key={key}
-                  variant="body1"
-                  sx={{
-                    whiteSpace: "pre-line",
-                    lineHeight: 1.8,
-                    mb: 1.5,
-                    "&:last-of-type": { mb: 0 },
-                  }}
-                >
-                  {renderTextWithLinks(block.data.text)}
-                </Typography>
-              );
-
-            case "image":
-              return (
-                <Box key={key} sx={{ my: 2.25, textAlign: "center" }}>
-                  <Box
+            switch (block.type) {
+              case "paragraph":
+                return (
+                  <Typography
+                    key={key}
+                    variant="body1"
                     sx={{
-                      display: "inline-block",
-                      maxWidth: "100%",
-                      borderRadius: 2.5,
-                      overflow: "hidden",
+                      whiteSpace: "pre-line",
+                      lineHeight: 1.8,
+                      mb: 1.5,
+                      "&:last-of-type": { mb: 0 },
                     }}
                   >
+                    {renderTextWithLinks(block.text ?? "")}
+                  </Typography>
+                );
+
+              case "image":
+                return (
+                  <Box key={key} sx={{ my: 2.25, textAlign: "center" }}>
                     <Box
-                      component="img"
-                      src={block.data.url}
-                      alt={block.data.caption ?? ""}
-                      loading="lazy"
                       sx={{
-                        display: "block",
-                        width: "100%",
-                        height: "auto",
+                        display: "inline-block",
+                        maxWidth: "100%",
+                        borderRadius: 2.5,
+                        overflow: "hidden",
                       }}
-                    />
-                  </Box>
-
-                  {block.data.caption && (
-                    <Typography
-                      variant="caption"
-                      color="text.secondary"
-                      sx={{ display: "block", mt: 1 }}
                     >
-                      {block.data.caption}
-                    </Typography>
-                  )}
-                </Box>
-              );
+                      <Box
+                        component="img"
+                        src={block.image_url ?? ""}
+                        alt={block.caption ?? ""}
+                        loading="lazy"
+                        sx={{
+                          display: "block",
+                          width: block.width ? `${block.width}px` : "auto",
+                          height: block.height ? `${block.height}px` : "auto",
+                          maxWidth: "100%",
+                          objectFit: "contain",
+                        }}
+                      />
+                    </Box>
 
-            default:
-              return null;
-          }
-        })}
+                    {block.caption && (
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ display: "block", mt: 1 }}
+                      >
+                        {block.caption}
+                      </Typography>
+                    )}
+                  </Box>
+                );
+
+              default:
+                return null;
+            }
+          })}
       </Box>
     </Box>
   );

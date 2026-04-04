@@ -3,7 +3,7 @@
 import fs from "fs";
 import path from "path";
 
-// @ts-ignore
+// @ts-expect-error expect the error since its outside the project scope
 const viteEnv = import.meta.env;
 
 // Get the filename from command-line arguments
@@ -13,7 +13,7 @@ const outputFilename = args[0] || ".env.docker"; // Default to `.env.docker` if 
 let envProductionContent = "";
 
 // Process environment variables
-for (const [key, _] of Object.entries(viteEnv)) {
+for (const [key] of Object.entries(viteEnv)) {
   if (key.startsWith("VITE_")) {
     envProductionContent += `${key}={{__${key.slice("VITE_".length)}__}}\n`;
   }

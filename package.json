@@ -23,6 +23,7 @@
     "notistack": "^3.0.2",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "react-oidc-context": "^3.3.1",
     "react-router-dom": "^7.10.1",
     "yaml": "^2.8.2",
     "zod": "^4.1.13"

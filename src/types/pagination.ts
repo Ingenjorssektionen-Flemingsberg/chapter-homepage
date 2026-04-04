@@ -1,6 +1,6 @@
 export type Pagination<T> = {
   limit: number;
   offset: number;
-  posts: T[];
+  items: T[];
   total: number;
 };

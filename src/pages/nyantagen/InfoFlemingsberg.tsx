@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import banner from "../../assets/banner.webp";
 import { LINKS } from "../../config/links";
 

@@ -2,8 +2,12 @@ import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import mogen from "../../assets/organ-och-namnder/mogen.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Mottagningsgruppen() {
+  const { gIndex } = useGroups();
+  const g = gIndex.get("mottagningsgruppen");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -30,11 +34,7 @@ export default function Mottagningsgruppen() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <GroupRoles
-        find="Mottagningsgruppen"
-        showGroupName={false}
-        showContact={true}
-      />
+      {g && <GroupRoles group={g} showGroupName={false} showContact={true} />}
     </InfoPageLayout>
   );
 }

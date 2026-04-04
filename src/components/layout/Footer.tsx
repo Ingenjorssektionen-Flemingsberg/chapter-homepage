@@ -3,7 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../../hooks/useTheme";
-import NavLink from "../util/NavLink";
+import NavLink from "../links/NavLink";
 import { LINKS } from "../../config/links";
 
 export default function Footer() {
@@ -74,7 +74,7 @@ export default function Footer() {
       {/* Socials */}
       <Stack direction="row" justifyContent="center" spacing={1.5}>
         <IconButton
-          href="https://www.facebook.com/isflemingsberg/"
+          href={LINKS.social.facebook.href}
           target="_blank"
           rel="noopener"
           aria-label="Facebook"
@@ -85,7 +85,7 @@ export default function Footer() {
         </IconButton>
 
         <IconButton
-          href="https://instagram.com/isflemingsberg"
+          href={LINKS.social.instagram.href}
           target="_blank"
           rel="noopener"
           aria-label="Instagram"
@@ -96,7 +96,7 @@ export default function Footer() {
         </IconButton>
 
         <IconButton
-          href="https://www.linkedin.com/company/ingsekt"
+          href={LINKS.social.linkedin.href}
           target="_blank"
           rel="noopener"
           aria-label="LinkedIn"

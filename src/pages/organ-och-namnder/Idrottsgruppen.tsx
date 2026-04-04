@@ -2,10 +2,14 @@ import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import igor from "../../assets/organ-och-namnder/igor.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import { LINKS } from "../../config/links";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Idrottsgruppen() {
+  const { gIndex } = useGroups();
+  const g = gIndex.get("idrottsgruppen");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -35,11 +39,7 @@ export default function Idrottsgruppen() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <GroupRoles
-        find="Idrottsgruppen"
-        showGroupName={false}
-        showContact={true}
-      />
+      {g && <GroupRoles group={g} showGroupName={false} showContact={true} />}
     </InfoPageLayout>
   );
 }

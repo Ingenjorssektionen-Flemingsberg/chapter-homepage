@@ -11,48 +11,25 @@ import {
 } from "@mui/material";
 import banner from "../assets/banner.webp";
 import HeroBanner from "../components/HeroBanner";
-import NavLink from "../components/util/NavLink";
+import NavLink from "../components/links/NavLink";
 import { LINKS } from "../config/links";
-import type { Group, Role } from "../types/chapter";
-import { rolesConfig } from "../config/rolesConfig";
+import type { GroupWithRoles, RoleWithMembers } from "../types/groups";
+import { useGroups } from "../contexts/GroupContext";
 
 const mailto = (email: string) => `mailto:${email}`;
 
-type FlattenedRole = {
-  key: string;
-  roleName: string;
-  members: string[];
-  contact?: string; // role.contact OR fallback group.contact
-};
+function findContacts(groups: GroupWithRoles[]): RoleWithMembers[] {
+  const contacts: RoleWithMembers[] = [];
 
-function pickPrimaryRoles(group: Group): Role[] {
-  if (!group.primaryRoles?.length) return [];
-  const roles = group.roles ?? [];
-  const primarySet = new Set(group.primaryRoles);
-  return roles.filter((r) => r.name && primarySet.has(r.name));
-}
-
-function flattenPrimaryRoles(groups: Group[]): FlattenedRole[] {
-  const out: FlattenedRole[] = [];
-
-  for (const group of groups) {
-    const primaries = pickPrimaryRoles(group);
-
-    for (let i = 0; i < primaries.length; i++) {
-      const role = primaries[i];
-      const roleName = role.name ?? "";
-      if (!roleName) continue;
-
-      out.push({
-        key: `${group.name}-${roleName}-${i}`,
-        roleName,
-        members: role.members ?? [],
-        contact: role.contact || group.contact || undefined,
-      });
+  for (const g of groups) {
+    for (const r of g.roles) {
+      if (r.display_contact) {
+        contacts.push(r);
+      }
     }
   }
 
-  return out;
+  return contacts;
 }
 
 function RoleContactCard({
@@ -62,7 +39,7 @@ function RoleContactCard({
 }: Readonly<{
   roleName: string;
   members: string[];
-  contact?: string;
+  contact: string | null;
 }>) {
   const membersText = members.length
     ? members.join(", ")
@@ -116,7 +93,8 @@ function InfoCard({
 }
 
 export default function Kontakt() {
-  const roleCards = flattenPrimaryRoles(rolesConfig.chapter);
+  const { groups } = useGroups();
+  const roleCards = findContacts(groups);
 
   return (
     <Container
@@ -198,9 +176,9 @@ export default function Kontakt() {
                 {roleCards.length ? (
                   roleCards.map((r) => (
                     <RoleContactCard
-                      key={r.key}
-                      roleName={r.roleName}
-                      members={r.members}
+                      key={r.id}
+                      roleName={r.name}
+                      members={r.members.map((p) => p.full_name)}
                       contact={r.contact}
                     />
                   ))

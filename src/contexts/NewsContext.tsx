@@ -2,24 +2,13 @@ import { createContext, useContext, useState, useMemo } from "react";
 import { useNotification } from "./NotificationContext";
 import type { Post } from "../types/news";
 import type { Pagination } from "../types/pagination";
-import {
-  createPost,
-  deletePost,
-  getPosts,
-  unarchivePost,
-  updatePost,
-} from "../services/newsService";
-import { useAuth } from "./AuthContext";
+import { getPosts } from "../services/newsService";
 
 interface NewsContextType {
   news: Post[];
   hasMore: boolean;
   loading: boolean;
   getMoreNews: () => Promise<void>;
-  postNews: (newsPost: Post) => Promise<void>;
-  updateNews: (newsPost: Post) => Promise<void>;
-  deleteNews: (id: string) => Promise<void>;
-  unarchiveNews: (id: string) => Promise<void>;
 }
 
 const NewsContext = createContext<NewsContextType | undefined>(undefined);
@@ -38,120 +27,38 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const { showNotification } = useNotification();
-  const { token } = useAuth();
 
-  const getMoreNewsFunc = async () => {
-    if (loading) return;
+  const value = useMemo<NewsContextType>(() => {
+    const getMoreNewsFunc = async () => {
+      if (loading) return;
 
-    try {
-      setLoading(true);
-      const resp: Pagination<Post> = await getPosts(token, 10, news.length);
-      setNews([...news, ...resp.posts]);
-      setHasMore(resp.total > resp.offset + resp.limit);
-    } catch (err) {
-      console.error("getMoreNews: " + err);
-      showNotification("Failed to get news", "error");
-    }
-    setLoading(false);
-  };
+      try {
+        setLoading(true);
+        const resp: Pagination<Post> = await getPosts(10, news.length);
+        setNews([...news, ...resp.items]);
+        setHasMore(resp.total > resp.offset + resp.limit);
+      } catch (err) {
+        console.error("getMoreNews: " + err);
+        showNotification("Failed to get news", "error");
+      }
+      setLoading(false);
+    };
 
-  const postNewsFunc = async (newsPost: Post) => {
-    if (loading || !token) return;
-
-    try {
-      setLoading(true);
-      const createdNews: Post = await createPost(token, {
-        slug: newsPost.slug,
-        title: newsPost.title,
-        summary: newsPost.summary ?? "",
-        content: newsPost.content,
-        status: newsPost.status,
-      });
-      setNews([...news, createdNews]);
-    } catch (err) {
-      console.error("postNews: " + err);
-      showNotification("Failed to create news", "error");
-    }
-    setLoading(false);
-  };
-
-  const updateNewsFunc = async (newsPost: Post) => {
-    if (loading || !token) return;
-
-    try {
-      setLoading(true);
-      const updatedNews: Post = await updatePost(token, newsPost.id, {
-        slug: newsPost.slug,
-        title: newsPost.title,
-        summary: newsPost.summary ?? "",
-        content: newsPost.content,
-        status: newsPost.status,
-      });
-
-      setNews((prev) =>
-        prev.map((n) => (n.id === updatedNews.id ? updatedNews : n)),
-      );
-    } catch (err) {
-      console.error("updateNews: " + err);
-      showNotification("Failed to update news", "error");
-    }
-    setLoading(false);
-  };
-
-  const deleteNewsFunc = async (id: string) => {
-    if (loading || !token) return;
-
-    try {
-      setLoading(true);
-      await deletePost(token, id);
-      setNews((prev) =>
-        prev.map((n) => (n.id === id ? { ...n, status: "archived" } : n)),
-      );
-    } catch (err) {
-      console.error("deleteNews: " + err);
-      showNotification("Failed to delete news", "error");
-    }
-    setLoading(false);
-  };
-
-  const unarchiveNewsFunc = async (id: string) => {
-    if (loading || !token) return;
-
-    try {
-      setLoading(true);
-      await unarchivePost(token, id);
-      setNews((prev) =>
-        prev.map((n) => (n.id === id ? { ...n, status: "draft" } : n)),
-      );
-    } catch (err) {
-      console.error("unarchiveNews: " + err);
-      showNotification("Failed to unarchive news", "error");
-    }
-    setLoading(false);
-  };
-
-  const value = useMemo<NewsContextType>(
-    () => ({
+    return {
       news: news,
       hasMore: hasMore,
       loading: loading,
       getMoreNews: getMoreNewsFunc,
-      postNews: postNewsFunc,
-      updateNews: updateNewsFunc,
-      deleteNews: deleteNewsFunc,
-      unarchiveNews: unarchiveNewsFunc,
-    }),
-    [
-      news,
-      hasMore,
-      loading,
-      getMoreNewsFunc,
-      postNewsFunc,
-      updateNewsFunc,
-      deleteNewsFunc,
-      unarchiveNewsFunc,
-    ],
-  );
+    };
+  }, [
+    news,
+    hasMore,
+    loading,
+    setNews,
+    setHasMore,
+    setLoading,
+    showNotification,
+  ]);
 
   return <NewsContext.Provider value={value}>{children}</NewsContext.Provider>;
 };

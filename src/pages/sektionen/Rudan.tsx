@@ -1,7 +1,7 @@
 import { Divider, Typography } from "@mui/material";
 import rudan from "../../assets/sektionen/rudan.webp";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import { LINKS } from "../../config/links";
 
 export default function Rudan() {

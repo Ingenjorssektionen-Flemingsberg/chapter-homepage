@@ -4,6 +4,7 @@ import { NotificationProvider } from "./contexts/NotificationContext";
 import { LoadingProvider } from "./contexts/LoadingContext";
 import { CalendarProvider } from "./contexts/CalenderContext";
 import { NewsProvider } from "./contexts/NewsContext";
+import { GroupProvider } from "./contexts/GroupContext";
 
 function App() {
   const pages = useRoutes(routes);
@@ -12,7 +13,9 @@ function App() {
     <LoadingProvider>
       <NotificationProvider>
         <CalendarProvider>
-          <NewsProvider>{pages}</NewsProvider>
+          <NewsProvider>
+            <GroupProvider>{pages}</GroupProvider>
+          </NewsProvider>
         </CalendarProvider>
       </NotificationProvider>
     </LoadingProvider>

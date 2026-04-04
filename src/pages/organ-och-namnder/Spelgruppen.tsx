@@ -2,10 +2,14 @@ import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import spruppen from "../../assets/organ-och-namnder/spruppen.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import { LINKS } from "../../config/links";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Spelgruppen() {
+  const { gIndex } = useGroups();
+  const g = gIndex.get("spruppen");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -43,7 +47,7 @@ export default function Spelgruppen() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <GroupRoles find="Spruppen" showGroupName={false} showContact={true} />
+      {g && <GroupRoles group={g} showGroupName={false} showContact={true} />}
     </InfoPageLayout>
   );
 }

@@ -1,27 +1,27 @@
 import { useMemo } from "react";
 import { Box, Divider, Stack } from "@mui/material";
-import type { ChapterConfig, Group, Role } from "../../types/chapter";
 import GroupRoles from "./GroupRoles";
+import type { GroupWithRoles, RoleWithMembers } from "../../types/groups";
 
 type ChapterRolesProps = {
-  data: ChapterConfig;
+  data: GroupWithRoles[];
   columnsWhenFull?: 1 | 2;
 };
 
-function roleWeight(role: Role): number {
+function roleWeight(role: RoleWithMembers): number {
   const membersCount = role.members?.length ?? 0;
   return (role.name ? 1 : 0) + Math.max(1, membersCount);
 }
 
-function groupWeight(group: Group): number {
+function groupWeight(group: GroupWithRoles): number {
   return 1 + (group.roles ?? []).reduce((acc, r) => acc + roleWeight(r), 0);
 }
 
-function splitBalanced(groups: Group[]) {
+function splitBalanced(groups: GroupWithRoles[]) {
   const sorted = [...groups].sort((a, b) => groupWeight(b) - groupWeight(a));
 
-  const left: Group[] = [];
-  const right: Group[] = [];
+  const left: GroupWithRoles[] = [];
+  const right: GroupWithRoles[] = [];
   let leftW = 0;
   let rightW = 0;
 
@@ -39,7 +39,7 @@ function splitBalanced(groups: Group[]) {
   return { left, right };
 }
 
-function Column({ groups }: Readonly<{ groups: Group[] }>) {
+function Column({ groups }: Readonly<{ groups: GroupWithRoles[] }>) {
   return (
     <Stack spacing={4}>
       {groups.map((g, idx) => (
@@ -63,8 +63,7 @@ export default function ChapterRoles({
   data,
   columnsWhenFull = 2,
 }: Readonly<ChapterRolesProps>) {
-  const groups = data.chapter ?? [];
-
+  const groups = data;
   const { left, right } = useMemo(() => splitBalanced(groups), [groups]);
 
   const isTwoCols = columnsWhenFull === 2;

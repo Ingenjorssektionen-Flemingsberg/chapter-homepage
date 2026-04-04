@@ -1,12 +1,14 @@
 import { Divider, Typography } from "@mui/material";
 import sky from "../../assets/sektionen/sky.webp";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
-import { rolesConfig } from "../../config/rolesConfig";
 import ChapterRoles from "../../components/roles/ChapterRoles";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import { LINKS } from "../../config/links";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Sektionen() {
+  const { groups } = useGroups();
+
   return (
     <InfoPageLayout
       navLabel="Sektionen"
@@ -31,7 +33,7 @@ export default function Sektionen() {
         }}
       />
 
-      <ChapterRoles data={rolesConfig} />
+      <ChapterRoles data={groups} />
     </InfoPageLayout>
   );
 }

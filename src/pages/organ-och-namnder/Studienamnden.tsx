@@ -3,8 +3,12 @@ import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import studienamnden from "../../assets/organ-och-namnder/studienamnden.webp";
 import RoleItem from "../../components/roles/RoleItem";
 import ComplaintForm from "../../components/ComplaintForm";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Studienamnden() {
+  const { rIndex } = useGroups();
+  const r = rIndex.get("styrelsen-studienämndens ordförande");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -37,7 +41,7 @@ export default function Studienamnden() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <RoleItem find="Studienämndens Ordförande" showContact={true} />
+      {r && <RoleItem role={r} showContact={true} />}
 
       <Divider sx={{ my: 3 }} />
 

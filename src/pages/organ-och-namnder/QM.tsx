@@ -3,10 +3,14 @@ import fisq from "../../assets/organ-och-namnder/fisq.webp";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import GroupRoles from "../../components/roles/GroupRoles";
 import SquareButton from "../../components/buttons/SquareButton";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import { LINKS } from "../../config/links";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function QM() {
+  const { gIndex } = useGroups();
+  const g = gIndex.get("qlubbmästeriet");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -44,11 +48,7 @@ export default function QM() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <GroupRoles
-        find="Qlubbmästeriet"
-        showGroupName={false}
-        showContact={true}
-      />
+      {g && <GroupRoles group={g} showGroupName={false} showContact={true} />}
 
       <Divider sx={{ my: 3 }} />
 

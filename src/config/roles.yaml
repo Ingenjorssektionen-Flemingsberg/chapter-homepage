@@ -58,7 +58,7 @@ chapter:
 
   - name: Revisorer
     roles:
-      - members: [William Ramberg]
+      - members: [William Ramberg, Leo Au]
 
   - name: Kårfullmäktige
     roles:
@@ -77,7 +77,7 @@ chapter:
       - name: Vice Qlubbmästare
         members: [Erik Moreno]
       - name: Vinstmästare
-        members: ["-"]
+        members: [Tim Lindkvist]
 
   - name: Företagsgruppen
     contact: fg@isflemingsberg.se

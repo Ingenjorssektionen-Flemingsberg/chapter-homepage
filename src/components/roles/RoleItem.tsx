@@ -1,10 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
-import type { Role } from "../../types/chapter";
-import { rolesConfig } from "../../config/rolesConfig";
-import NavLink from "../util/NavLink";
+import type { RoleWithMembers } from "../../types/groups";
+import NavLink from "../links/NavLink";
 
 type RoleItemProps = {
-  role?: Role;
+  role: RoleWithMembers;
   find?: string;
   showContact?: boolean;
   titleVariant?: "subtitle1" | "subtitle2" | "body1";
@@ -13,27 +12,18 @@ type RoleItemProps = {
 
 export default function RoleItem({
   role,
-  find,
   showContact = false,
   titleVariant = "subtitle1",
   memberVariant = "body1",
 }: Readonly<RoleItemProps>) {
-  const foundRole: Role | undefined =
-    role ??
-    (find
-      ? rolesConfig.chapter
-          .flatMap((group) => group.roles ?? [])
-          .find((r) => r?.name === find)
-      : undefined);
-
-  const members = foundRole?.members ?? [];
-  const hasTitle = Boolean(foundRole?.name);
+  const members = role.members ?? [];
+  const hasTitle = Boolean(role.name);
 
   return (
     <Box>
       {hasTitle && (
         <Typography variant={titleVariant} sx={{ fontWeight: 700 }}>
-          {foundRole!.name}
+          {role.name}
         </Typography>
       )}
 
@@ -46,7 +36,7 @@ export default function RoleItem({
             mt: hasTitle ? 0 : 0.25,
           }}
         >
-          {members.join("\n")}
+          {members.map((m) => m.full_name).join("\n")}
         </Typography>
       ) : (
         <Typography variant="body2" sx={{ opacity: 0.6 }}>
@@ -54,10 +44,10 @@ export default function RoleItem({
         </Typography>
       )}
 
-      {showContact && foundRole?.contact && (
+      {showContact && role?.contact && (
         <Stack spacing={0}>
-          <NavLink link={{ href: `mailto:${foundRole?.contact}` }}>
-            {foundRole?.contact}
+          <NavLink link={{ href: `mailto:${role.contact}` }}>
+            {role.contact}
           </NavLink>
         </Stack>
       )}

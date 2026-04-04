@@ -2,10 +2,14 @@ import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import lokal from "../../assets/banner.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import { LINKS } from "../../config/links";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Lokalnamnden() {
+  const { gIndex } = useGroups();
+  const g = gIndex.get("lokalnämnden");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -27,11 +31,7 @@ export default function Lokalnamnden() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <GroupRoles
-        find="Lokalnämnden"
-        showGroupName={false}
-        showContact={true}
-      />
+      {g && <GroupRoles group={g} showGroupName={false} showContact={true} />}
     </InfoPageLayout>
   );
 }

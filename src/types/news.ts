@@ -1,42 +1,21 @@
-export type PostStatus = "draft" | "published" | "archived";
-
-export interface ParagraphBlock {
-  type: "paragraph";
-  data: {
-    text: string;
-  };
-}
-
-export interface ImageBlock {
-  type: "image";
-  data: {
-    url: string;
-    caption?: string;
-  };
-}
-
-export type ContentBlock = ParagraphBlock | ImageBlock;
-
-export interface PostContent {
-  blocks: ContentBlock[];
-}
-
-export interface Post {
+export type Post = {
   id: string;
-  slug: string;
-  title: string;
-  summary?: string;
-  content: PostContent;
-  status: PostStatus;
-  created_at: string;
-  updatedAt: string;
-  published_at?: string;
-}
-
-export interface CreatePostRequest {
-  slug: string;
   title: string;
   summary: string;
-  content: PostContent;
-  status: PostStatus;
-}
+  published: boolean;
+  publish_at: string | null;
+  blocks: PostBlock[];
+};
+
+export type PostBlock = {
+  id: string;
+  position: number;
+  type: "paragraph" | "image";
+
+  text?: string | null;
+  image_url?: string | null;
+  caption?: string | null;
+
+  width?: number | null;
+  height?: number | null;
+};

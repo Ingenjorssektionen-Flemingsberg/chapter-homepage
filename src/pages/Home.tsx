@@ -5,7 +5,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../hooks/useTheme";
-import NavLink from "../components/util/NavLink";
+import NavLink from "../components/links/NavLink";
 import { LINKS } from "../config/links";
 
 export default function Home() {

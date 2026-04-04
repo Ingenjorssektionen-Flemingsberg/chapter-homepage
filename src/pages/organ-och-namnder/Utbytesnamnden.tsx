@@ -2,8 +2,12 @@ import { Divider, Typography } from "@mui/material";
 import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import GroupRoles from "../../components/roles/GroupRoles";
 import utbyte from "../../assets/organ-och-namnder/utbyte.webp";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Utbytesnamnden() {
+  const { gIndex } = useGroups();
+  const g = gIndex.get("utbytesnämnden");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -27,11 +31,7 @@ export default function Utbytesnamnden() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <GroupRoles
-        find="Utbytesnämnden"
-        showGroupName={false}
-        showContact={true}
-      />
+      {g && <GroupRoles group={g} showGroupName={false} showContact={true} />}
     </InfoPageLayout>
   );
 }

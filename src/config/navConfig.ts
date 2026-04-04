@@ -1,3 +1,5 @@
+import { LINKS } from "./links";
+
 export interface NavSubLink {
   label: string;
   path: string;
@@ -80,8 +82,8 @@ export const navItems: NavItem[] = [
   },
   {
     label: "Discord",
-    path: "https://discord.gg/qTj7QBJcU4",
-    remote: true,
+    path: LINKS.social.sektionDiscrod.href,
+    remote: LINKS.social.sektionDiscrod.remote,
   },
   {
     label: "Kontakt",

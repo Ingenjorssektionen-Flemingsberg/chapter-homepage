@@ -1,11 +1,10 @@
 import { Stack, Typography } from "@mui/material";
-import type { Group } from "../../types/chapter";
-import { rolesConfig } from "../../config/rolesConfig";
+import type { GroupWithRoles } from "../../types/groups";
 import RoleItem from "./RoleItem";
-import NavLink from "../util/NavLink";
+import NavLink from "../links/NavLink";
 
 type GroupRolesProps = {
-  group?: Group;
+  group: GroupWithRoles;
   find?: string;
   showGroupName?: boolean;
   showContact?: boolean;
@@ -13,17 +12,12 @@ type GroupRolesProps = {
 
 export default function GroupRoles({
   group,
-  find,
   showGroupName = true,
   showContact = false,
 }: Readonly<GroupRolesProps>) {
-  const foundGroup: Group | undefined =
-    group ??
-    (find ? rolesConfig.chapter.find((g) => g?.name === find) : undefined);
-
-  const roles = (foundGroup?.roles ?? []).filter(Boolean);
+  const roles = (group.roles ?? []).filter(Boolean);
   const hasRoles = roles.length > 0;
-  const hasTitle = Boolean(foundGroup?.name);
+  const hasTitle = Boolean(group.name);
 
   return (
     <Stack spacing={2}>
@@ -34,7 +28,7 @@ export default function GroupRoles({
           textTransform="uppercase"
           letterSpacing="0.05em"
         >
-          {foundGroup!.name}
+          {group.name}
         </Typography>
       )}
 
@@ -42,7 +36,7 @@ export default function GroupRoles({
         <Stack spacing={2}>
           {roles.map((role, idx) => (
             <RoleItem
-              key={`${foundGroup?.name ?? "group"}-role-${role.name ?? idx}`}
+              key={`${group.name ?? "group"}-role-${role.name ?? idx}`}
               role={role}
               showContact={showContact}
             />
@@ -53,13 +47,13 @@ export default function GroupRoles({
           —
         </Typography>
       )}
-      {showContact && foundGroup?.contact && (
+      {showContact && group.contact && (
         <Stack spacing={0}>
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             Kontakt
           </Typography>
-          <NavLink link={{ href: `mailto:${foundGroup?.contact}` }}>
-            {foundGroup?.contact}
+          <NavLink link={{ href: `mailto:${group.contact}` }}>
+            {group.contact}
           </NavLink>
         </Stack>
       )}

@@ -27,7 +27,7 @@ update_env_vars_placeholders() {
 }\n\n`;
 
 // Add the updates for all VITE_* env variables
-for (const [key, _] of Object.entries(viteEnv)) {
+for (const [key] of Object.entries(viteEnv)) {
   if (key.startsWith("VITE_")) {
     const env = key.slice("VITE_".length);
     entrypointScript += `update_env_vars_placeholders "/usr/share/nginx/html" "__${env}__" "${env}"\n`;

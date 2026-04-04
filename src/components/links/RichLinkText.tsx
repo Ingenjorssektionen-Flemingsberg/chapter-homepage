@@ -1,18 +1,7 @@
 import * as React from "react";
-import { Link } from "@mui/material";
-
-/**
- * Matches markdown links like: [KTH](https://kth.se)
- * - Group 1: link text
- * - Group 2: href
- */
-const MD_LINK_REGEX = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
-
-/**
- * Matches raw URLs like: https://example.com/foo
- * (Stops at whitespace; you can make this stricter if you want.)
- */
-const URL_REGEX = /\bhttps?:\/\/[^\s]+/g;
+import { type SxProps } from "@mui/material";
+import { LINK_REGEX } from "./Links";
+import { ExternalMuiLink } from "./ExternalLink";
 
 type RichLinkOptions = {
   /**
@@ -20,29 +9,8 @@ type RichLinkOptions = {
    * or optionally a shorter label.
    */
   rawUrlLabel?: (url: string) => React.ReactNode;
-  linkSx?: Record<string, any>;
+  linkSx?: SxProps;
 };
-
-function ExternalMuiLink({
-  href,
-  children,
-  sx,
-}: Readonly<{
-  href: string;
-  children: React.ReactNode;
-  sx?: Record<string, any>;
-}>) {
-  return (
-    <Link
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      sx={{ wordBreak: "break-word", ...sx }}
-    >
-      {children}
-    </Link>
-  );
-}
 
 function isSafeHttpUrl(href: string): boolean {
   // Defensive: only allow http(s) since you asked for https?://
@@ -62,7 +30,7 @@ function tokenizeMarkdownLinks(input: string) {
   > = [];
 
   let lastIndex = 0;
-  for (const match of input.matchAll(MD_LINK_REGEX)) {
+  for (const match of input.matchAll(LINK_REGEX.MD_LINK_REGEX)) {
     const full = match[0];
     const text = match[1] ?? "";
     const href = match[2] ?? "";
@@ -89,10 +57,10 @@ function tokenizeMarkdownLinks(input: string) {
 function renderTextWithRawUrls(
   text: string,
   keyPrefix: string,
-  opts?: RichLinkOptions
+  opts?: RichLinkOptions,
 ): React.ReactNode[] {
-  const parts = text.split(URL_REGEX);
-  const matches = text.match(URL_REGEX) ?? [];
+  const parts = text.split(LINK_REGEX.URL_REGEX);
+  const matches = new RegExp(LINK_REGEX.URL_REGEX).exec(text) ?? [];
 
   const out: React.ReactNode[] = [];
 
@@ -106,10 +74,10 @@ function renderTextWithRawUrls(
         <ExternalMuiLink
           key={`${keyPrefix}-u-${i}`}
           href={url}
-          sx={opts?.linkSx}
+          sx={{ ...opts?.linkSx }}
         >
           {opts?.rawUrlLabel ? opts.rawUrlLabel(url) : url}
-        </ExternalMuiLink>
+        </ExternalMuiLink>,
       );
     }
   }
@@ -122,7 +90,7 @@ function renderTextWithRawUrls(
  */
 export function renderTextWithLinks(
   input: string,
-  opts?: RichLinkOptions
+  opts?: RichLinkOptions,
 ): React.ReactNode {
   if (!input) return null;
 
@@ -140,7 +108,7 @@ export function renderTextWithLinks(
         nodes.push(
           <span key={`${keyPrefix}-unsafe`}>
             [{tok.text}]({tok.href})
-          </span>
+          </span>,
         );
         return;
       }
@@ -149,10 +117,10 @@ export function renderTextWithLinks(
         <ExternalMuiLink
           key={`${keyPrefix}-md`}
           href={tok.href}
-          sx={opts?.linkSx}
+          sx={{ ...opts?.linkSx }}
         >
           {tok.text}
-        </ExternalMuiLink>
+        </ExternalMuiLink>,
       );
       return;
     }
@@ -163,8 +131,3 @@ export function renderTextWithLinks(
 
   return <>{nodes}</>;
 }
-
-export const LINK_REGEX = {
-  MD_LINK_REGEX,
-  URL_REGEX,
-};

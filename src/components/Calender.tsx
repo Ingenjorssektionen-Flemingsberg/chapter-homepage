@@ -66,7 +66,7 @@ export default function Calendar() {
   const monthName = currentDate.toLocaleString("default", { month: "long" });
   const monthGrid = useMemo(
     () => getPaddedMonthGrid(currentDate),
-    [currentDate]
+    [currentDate],
   );
 
   const eventsByDate = useMemo(() => {
@@ -80,7 +80,7 @@ export default function Calendar() {
       const isAllDay = !!ev.start?.date && !ev.start?.dateTime;
 
       let current = startOfLocalDay(new Date(startRaw));
-      let last = startOfLocalDay(new Date(endRaw || startRaw));
+      const last = startOfLocalDay(new Date(endRaw || startRaw));
 
       // Google all-day events use exclusive end
       if (isAllDay) {
@@ -99,7 +99,7 @@ export default function Calendar() {
         current = new Date(
           current.getFullYear(),
           current.getMonth(),
-          current.getDate() + 1
+          current.getDate() + 1,
         );
       }
     }

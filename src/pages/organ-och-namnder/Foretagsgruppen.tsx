@@ -3,10 +3,14 @@ import InfoPageLayout from "../../components/layout/InfoPageLayout";
 import foretag from "../../assets/organ-och-namnder/foretag.webp";
 import GroupRoles from "../../components/roles/GroupRoles";
 import MessageForm from "../../components/MessageForm";
-import NavLink from "../../components/util/NavLink";
+import NavLink from "../../components/links/NavLink";
 import { LINKS } from "../../config/links";
+import { useGroups } from "../../contexts/GroupContext";
 
 export default function Foretagsgruppen() {
+  const { gIndex } = useGroups();
+  const g = gIndex.get("företagsgruppen");
+
   return (
     <InfoPageLayout
       navLabel="Organ och Nämnder"
@@ -39,11 +43,7 @@ export default function Foretagsgruppen() {
       <Typography variant="h5" mb={3}>
         Ansvarig
       </Typography>
-      <GroupRoles
-        find="Företagsgruppen"
-        showGroupName={false}
-        showContact={true}
-      />
+      {g && <GroupRoles group={g} showGroupName={false} showContact={true} />}
 
       <Divider sx={{ my: 3 }} />
 
