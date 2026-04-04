@@ -6,7 +6,7 @@ import {
   useEffect,
   useCallback,
 } from "react";
-import { getCalendarEvents } from "../services/calendarService";
+import { getCalendarEvents } from "../services/calendar";
 import { useLoading } from "./LoadingContext";
 import { useNotification } from "./NotificationContext";
 

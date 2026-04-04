@@ -1,32 +1,41 @@
 import { Box, Stack, TextField, Typography } from "@mui/material";
 import SquareButton from "./buttons/SquareButton";
+import { sendMail } from "../services/mails";
+import type { FormKind, MailRequest } from "../types/form";
 
 type MessageFormProps = {
   title: string;
   text?: string;
-  email: string;
+  kind: FormKind;
 };
+
+function getString(fd: FormData, key: string): string {
+  const value = fd.get(key);
+  return typeof value === "string" ? value : "";
+}
 
 export default function MessageForm({
   title,
   text,
-  email,
+  kind,
 }: Readonly<MessageFormProps>) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-    const payload = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("subject"),
-      complaint: formData.get("message"),
+    const payload: MailRequest = {
+      kind,
+      subject: getString(formData, "subject"),
+      name: getString(formData, "name"),
+      email: getString(formData, "email"),
+      phone: getString(formData, "phone"),
+      message: getString(formData, "message"),
     };
 
-    // TODO: Intentionally left unused, to be sent via backend mail service ?
-    void payload;
-    void email;
+    await sendMail(payload);
+    form.reset();
   };
 
   return (
@@ -45,14 +54,22 @@ export default function MessageForm({
           helperText="Koppla ett namn med ärendet, om du vill."
         />
 
-        <TextField
-          name="email"
-          label="Epostadress"
-          type="email"
-          fullWidth
-          required
-          helperText="(krävs)"
-        />
+        <Box display="flex" flexDirection="row" gap={2}>
+          <TextField
+            name="email"
+            label="Epostadress"
+            type="email"
+            fullWidth
+            helperText="(krävs)"
+          />
+
+          <TextField
+            name="phone"
+            label="Telefonnummer"
+            fullWidth
+            helperText="(Frivilligt)"
+          />
+        </Box>
 
         <TextField
           name="subject"

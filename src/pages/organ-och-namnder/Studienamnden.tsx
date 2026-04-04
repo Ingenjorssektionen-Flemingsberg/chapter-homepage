@@ -45,7 +45,7 @@ export default function Studienamnden() {
 
       <Divider sx={{ my: 3 }} />
 
-      <ComplaintForm title="Lämna ett klagomål till studienämnden" email="" />
+      <ComplaintForm title="Lämna ett klagomål till studienämnden" kind="sno" />
     </InfoPageLayout>
   );
 }

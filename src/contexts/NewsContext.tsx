@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useMemo } from "react";
 import { useNotification } from "./NotificationContext";
 import type { Post } from "../types/news";
 import type { Pagination } from "../types/pagination";
-import { getPosts } from "../services/newsService";
+import { getPosts } from "../services/news";
 
 interface NewsContextType {
   news: Post[];

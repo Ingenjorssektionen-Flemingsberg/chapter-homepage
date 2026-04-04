@@ -50,7 +50,7 @@ export default function Foretagsgruppen() {
       <MessageForm
         title="Kontakt om samarbete"
         text="Är ni intresserade att komma i kontakt med våra studenter? Skulle ni vilja ha en monter uppe eller varför inte en lunchföreläsning? Vad än fallet är det bara att kontakta oss så kan vi säkert lösa det."
-        email=""
+        kind="fg"
       />
     </InfoPageLayout>
   );

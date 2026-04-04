@@ -33,7 +33,7 @@ export default function JML() {
       {r && <RoleItem role={r} showContact={true} />}
       <Divider sx={{ my: 3 }} />
 
-      <ComplaintForm title="Lämna ett JML klagomål" email="" />
+      <ComplaintForm title="Lämna ett JML klagomål" kind="jml" />
     </InfoPageLayout>
   );
 }

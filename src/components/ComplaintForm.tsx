@@ -1,30 +1,38 @@
 import { Box, Stack, TextField, Typography } from "@mui/material";
 import SquareButton from "./buttons/SquareButton";
+import type { FormKind, MailRequest } from "../types/form";
+import { sendMail } from "../services/mails";
 
 type ComplaintFormProps = {
   title: string;
-  email: string;
+  kind: FormKind;
 };
+
+function getString(fd: FormData, key: string): string {
+  const value = fd.get(key);
+  return typeof value === "string" ? value : "";
+}
 
 export default function ComplaintForm({
   title,
-  email,
+  kind,
 }: Readonly<ComplaintFormProps>) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-    const payload = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      complaint: formData.get("complaint"),
+    const payload: MailRequest = {
+      kind,
+      name: getString(formData, "name"),
+      email: getString(formData, "email"),
+      phone: getString(formData, "phone"),
+      message: getString(formData, "complaint"),
     };
 
-    // TODO: Intentionally left unused, to be sent via backend mail service ?
-    void payload;
-    void email;
+    await sendMail(payload);
+    form.reset();
   };
 
   return (
