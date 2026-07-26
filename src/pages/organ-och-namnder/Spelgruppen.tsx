@@ -8,7 +8,7 @@ import { useGroups } from "../../contexts/GroupContext";
 
 export default function Spelgruppen() {
   const { gIndex } = useGroups();
-  const g = gIndex.get("spruppen");
+  const g = gIndex.get("spelgruppen");
 
   return (
     <InfoPageLayout
