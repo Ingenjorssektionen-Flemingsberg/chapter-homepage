@@ -16,7 +16,8 @@ RUN bun install
 COPY .env.development .
 COPY --chmod=775 scripts/ ./
 
-RUN ./docker-envs.ts .env.production && \
+RUN set -a && . ./.env.development && set +a && \
+    ./docker-envs.ts .env.production && \
     ./nginx-entrypoint.ts && \
     rm .env.development
 
