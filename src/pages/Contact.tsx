@@ -242,7 +242,7 @@ export default function Kontakt() {
               </InfoCard>
 
               <InfoCard title="Socialt">
-                <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap" }}>
+                <Stack direction="row" sx={{ flexWrap: "wrap", gap: 1 }}>
                   <Chip
                     size="small"
                     label="Facebook"
