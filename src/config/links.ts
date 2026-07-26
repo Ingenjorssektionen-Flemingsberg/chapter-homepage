@@ -133,24 +133,8 @@ export const LINKS = {
   },
 
   kth: {
-    bas: {
-      href: "https://www.kth.se/student/studier/nypakth/tekniskt-basar-kthflemingsberg-1.553271",
-      remote: true,
-    },
-    titeh: {
-      href: "https://www.kth.se/student/studier/nypakth/antagen-till-teknik-och-ekonomi-180-hp-1.358413",
-      remote: true,
-    },
-    tidaa: {
-      href: "https://www.kth.se/student/studier/nypakth/datateknik-flemingsberg-180-1.20533",
-      remote: true,
-    },
-    tiela: {
-      href: "https://www.kth.se/student/studier/nypakth/elektroteknik-180-1.62763",
-      remote: true,
-    },
-    timel: {
-      href: "https://www.kth.se/student/studier/nypakth/medicinsk-teknik-180-1.553000",
+    nypakth: {
+      href: "https://www.kth.se/student/studier/nypakth",
       remote: true,
     },
 

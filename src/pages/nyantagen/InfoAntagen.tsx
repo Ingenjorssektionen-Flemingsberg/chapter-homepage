@@ -33,26 +33,10 @@ export default function InfoAntagen() {
         vilken tid och grupp du tillhör till.
         <br />
         <br />
-        Mer information om tider och gruppindelningar hittar du här:
-        <ul>
-          <li>
-            <NavLink link={LINKS.kth.bas}>Tekniskt basår, 60 fup </NavLink>
-          </li>
-          <li>
-            <NavLink link={LINKS.kth.titeh}>
-              Teknik och Ekonomi, 180 hp{" "}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink link={LINKS.kth.tidaa}>Datateknik, 180 hp </NavLink>
-          </li>
-          <li>
-            <NavLink link={LINKS.kth.tiela}>Elektroteknik, 180 hp</NavLink>
-          </li>
-          <li>
-            <NavLink link={LINKS.kth.timel}>Medicinsk teknik, 180 hp</NavLink>
-          </li>
-        </ul>
+        Mer information om tider och gruppindelningar hittar du{" "}
+        <NavLink link={LINKS.kth.nypakth}>här</NavLink>.
+        <br />
+        <br />
         Plats: Servicecenter, KTH Flemingsberg (entréplan). Hälsovägen 11C,
         Huddinge.{" "}
         <NavLink link={LINKS.maps.kthFlemingsberg}>Se platsen på karta</NavLink>
