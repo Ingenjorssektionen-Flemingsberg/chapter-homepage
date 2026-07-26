@@ -10,19 +10,17 @@ let entrypointScript = `#!/usr/bin/env sh
 # Entrypoint script, replaces env variables in the dist files
 set -eu
 
-exec "$@"
-  
 # Function to update environment variables in files recursively
 update_env_vars_placeholders() {
-  local directory="$1"
-  local old_var="$2"
-  local new_value="\${!3:-}"
+  directory="$1"
+  old_var="$2"
+  var_name="$3"
+  new_value=$(printenv "$var_name" 2>/dev/null || true)
 
-  if [[ -z "$new_value" && -n "$3" ]]; then
-    echo "[WARN]: The value for $3 is not set." >&2
+  if [ -z "$new_value" ] && [ -n "$var_name" ]; then
+    echo "[WARN]: The value for $var_name is not set." >&2
   fi
 
-  # Find files in the given directory recursively
   find "$directory" -type f -exec sed -i "s|{{$old_var}}|$new_value|g" {} +
 }\n\n`;
 

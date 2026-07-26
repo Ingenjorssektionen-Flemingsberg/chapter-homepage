@@ -3,7 +3,6 @@
 import fs from "fs";
 import path from "path";
 
-// @ts-expect-error expect the error since its outside the project scope
 const viteEnv = import.meta.env;
 
 // Get the filename from command-line arguments
