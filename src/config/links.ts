@@ -92,6 +92,10 @@ export const LINKS = {
       href: "https://linktr.ee/isflemingsberg",
       remote: true,
     },
+    tiktok: {
+      href: "https://www.tiktok.com/@isflemingsberg",
+      remote: true,
+    },
 
     // Organ & Nämnder
     qmFacebook: {

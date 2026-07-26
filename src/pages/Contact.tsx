@@ -275,6 +275,14 @@ export default function Kontakt() {
                     href={LINKS.social.discord.href}
                     target="_blank"
                   />
+                  <Chip
+                    size="small"
+                    label="TikTok"
+                    component="a"
+                    clickable
+                    href={LINKS.social.tiktok.href}
+                    target="_blank"
+                  />
                 </Stack>
               </InfoCard>
             </Stack>

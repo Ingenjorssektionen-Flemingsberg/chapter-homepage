@@ -7,9 +7,10 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTheme } from "../hooks/useTheme";
 import NavLink from "../components/links/NavLink";
 import { LINKS } from "../config/links";
+import tiktok from "../assets/tiktok.svg";
 
 export default function Home() {
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
 
   return (
     <Container
@@ -124,6 +125,30 @@ export default function Home() {
                 }}
               >
                 <LinkedInIcon />
+              </IconButton>
+
+              <IconButton
+                href={LINKS.social.tiktok.href}
+                target="_blank"
+                aria-label="TikTok"
+                disableRipple
+                sx={{
+                  backgroundColor: theme.palette.text.primary,
+                  color: theme.palette.primary.contrastText,
+                  borderRadius: 1.5,
+                }}
+              >
+                <Box
+                  component="img"
+                  src={tiktok}
+                  sx={{
+                    width: 20,
+                    height: 20,
+                    backgroundColor: isDark ? "" : "currentColor",
+                    borderRadius: 1,
+                    mx: 0.2,
+                  }}
+                />
               </IconButton>
             </Stack>
           </Stack>
