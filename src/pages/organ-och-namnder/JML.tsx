@@ -7,7 +7,7 @@ import { useGroups } from "../../contexts/GroupContext";
 
 export default function JML() {
   const { rIndex } = useGroups();
-  const r = rIndex.get("styrelsen-jml-ansvarig");
+  const r = rIndex.get("styrelsen-jml-nämndens ordförande");
 
   return (
     <InfoPageLayout
