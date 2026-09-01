@@ -62,7 +62,7 @@ export const LINKS = {
       href: "/organ-och-nämnder",
     },
     fam: {
-      href: "https://isf-fam.se",
+      href: "https://famkth.se",
       remote: true,
     },
   },
@@ -203,36 +203,44 @@ export const LINKS = {
   // Documents
   // -----------------
   docs: {
+    // Länk till sektionens stadgar
     stadgar: {
       href: "https://drive.google.com/file/d/1dCNJUAjUpPN6JdgPEi1cr0jzOldno6Yv/view?usp=drive_link",
       remote: true,
     },
+    // Länk till dokument med alla våra varumärken och logotyper
     varumarkenOchLogotyper: {
       href: "https://drive.google.com/file/d/1-FPaCAIfSOJH2OBfAiyh4ZLt6o20Dy8V/view?usp=sharing",
       remote: true,
     },
+    // Länk till sektionens reglemente
     reglemente: {
       href: "https://drive.google.com/open?id=1tQb1PrAbHCoUohqXTYzpSwjNS0pfX-DW&usp=drive_copy",
       remote: true,
     },
 
+    // Detta årets SM mapp
+    currentYearSm: {
+      href: "https://drive.google.com/drive/folders/1C1LXggSB7IkzmDQqAJ8fNUziiQKdfW9P?usp=drive_link",
+      remote: true,
+    },
+    // Länk till SM Guiden
     smGuide: {
       href: "https://drive.google.com/file/d/1TKy9drsz5bDNmcQ6FFEeMReiOyF9bJEr/view?usp=sharing",
       remote: true,
     },
-    currentYearSm: {
-      href: "https://drive.google.com/drive/folders/1wH3vGqSDEsM4Yn9tagDljv5k_4G1fsaB?usp=sharing",
-      remote: true,
-    },
+    // Länk till drive mappen med alla föregående års sm protokoll
     smArkiv: {
       href: "https://drive.google.com/drive/folders/1l8p312qmFeGSdyALApIMq8zu9lzA-5ij?usp=sharing",
       remote: true,
     },
 
+    // Länk till årets styrelse möte mapp
     currentYearStyrelseMote: {
-      href: "https://drive.google.com/drive/folders/17Nk7sRkxYubnYrozTd-H54FuAnCVWYhm?usp=drive_link",
+      href: "https://drive.google.com/drive/folders/1pl9MKsvH3aMOVB0eoxdZzGfoZ6goMax5?usp=sharing",
       remote: true,
     },
+    // Länk till drive mappen med alla föregående års styrelse möte protokoll
     styrelseMoteArkiv: {
       href: "https://drive.google.com/drive/folders/1SpILAQLOzgPQUcjVNjmRCQK9MSLVnObL?usp=sharing",
       remote: true,
@@ -244,20 +252,18 @@ export const LINKS = {
     },
 
     // QM
-
     qmReglemente: {
-      href: "",
-      remote: true,
+      href: "404",
+      remote: false,
     },
     qmProtokoll: {
-      href: "",
-      remote: true,
+      href: "404",
+      remote: false,
     },
 
     // OVVE
-
     ovveguide: {
-      href: "",
+      href: "https://drive.google.com/file/d/1boqsE3wHHwmx1qMnINyEggJADNJ0hK3l/view?usp=sharing",
       remote: true,
     },
   },
