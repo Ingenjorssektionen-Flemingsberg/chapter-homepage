@@ -73,7 +73,7 @@ export const LINKS = {
   social: {
     // Sektionen
     discord: {
-      href: "https://discord.gg/qTj7QBJcU4",
+      href: "https://discord.gg/4NCHnFf3tk",
       remote: true,
     },
     instagram: {
