@@ -1,6 +1,6 @@
 {
-  "name": "Ingenjörssektionen Flemingsberg",
-  "short_name": "IsF",
+  "name": "My Site",
+  "short_name": "My Site",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
