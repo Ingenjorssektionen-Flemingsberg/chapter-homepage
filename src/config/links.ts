@@ -126,10 +126,6 @@ export const LINKS = {
       href: "https://discord.gg/2EJ9YZp9Yp",
       remote: true,
     },
-    sektionDiscrod: {
-      href: "https://discord.gg/qTj7QBJcU4",
-      remote: true,
-    },
   },
 
   kth: {

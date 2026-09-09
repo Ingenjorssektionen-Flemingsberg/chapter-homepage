@@ -83,8 +83,8 @@ export const navItems: NavItem[] = [
   },
   {
     label: "Discord",
-    path: LINKS.social.sektionDiscrod.href,
-    remote: LINKS.social.sektionDiscrod.remote,
+    path: LINKS.social.discord.href,
+    remote: LINKS.social.discord.remote,
   },
   {
     label: "Kontakt",
